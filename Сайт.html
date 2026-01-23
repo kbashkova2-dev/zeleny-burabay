@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8"/>
+  <title>Эко-курорт «Зелёный Бурабай» — волонтёрские туры в Щучинске и Бурабае</title>
+  <meta name="description" content="Волонтёрский эко-тур: озеленение, уход за природой, изучение истории Щучинска и Бурабая, экскурсии и отдых." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#2f9e4f;
+      --accent-2:#2b6cb0;
+      --muted:#000000;
+      --bg:#f7fbf7;
+      --card:#ffffff;
+      --radius:14px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#0f172a;line-height:1.45;overflow-x:hidden;position:relative;min-height:100vh}
+
+    /* Fade-in for main blocks */
+    header,section,footer{animation:fadeIn 1s ease forwards;opacity:0}
+    header{animation-delay:0.25s}
+    section{animation-delay:0.6s}
+    footer{animation-delay:1s}
+    @keyframes fadeIn{to{opacity:1}}
+
+    .container{max-width:1200px;padding:28px;margin:0 auto;position:relative;z-index:2}
+
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 0;transition:all 0.45s ease;background:transparent}
+    header .logo{display:flex;gap:12px;align-items:center}
+    .logo-badge{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;transition:transform 0.4s ease, box-shadow .4s ease}
+    .logo-badge:hover{transform:rotate(8deg) scale(1.06);box-shadow:0 14px 30px rgba(47,158,79,0.12)}
+    nav a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600;position:relative;transition:color 0.3s ease}
+    nav a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:3px;background:var(--accent);transition:width 0.28s ease}
+    nav a:hover{color:var(--accent)}
+    nav a:hover::after{width:100%}
+    nav a.cta{background:var(--accent);color:#fff;padding:8px 12px;border-radius:10px;box-shadow:0 10px 20px rgba(47,158,79,0.08)}
+    nav a.cta:hover{transform:translateY(-3px)}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:28px 0}
+    .hero-card{background:var(--card);border-radius:var(--radius);padding:28px;box-shadow:0 8px 30px rgba(15,23,42,0.06);transition:transform 0.4s ease, box-shadow 0.4s ease}
+    .hero-card:hover{transform:translateY(-6px);box-shadow:0 18px 48px rgba(15,23,42,0.08)}
+    h1{margin:0 0 8px;font-size:32px;line-height:1.05;letter-spacing:-0.2px}
+    .lead{margin:0;color:var(--muted);font-size:15px}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg, rgba(47,158,79,0.12), rgba(43,108,176,0.06));font-weight:700;color:var(--accent);font-size:13px}
+
+    .hero-meta{display:flex;gap:12px;margin-top:18px}
+    .meta-card{background:rgba(255,255,255,0.6);padding:12px;border-radius:12px;min-width:120px;backdrop-filter: blur(6px);box-shadow:0 6px 18px rgba(15,23,42,0.04)}
+    .btn{display:inline-block;padding:10px 18px;border-radius:12px;background:var(--accent);color:#fff;text-decoration:none;font-weight:800;letter-spacing:0.2px;box-shadow:0 10px 28px rgba(47,158,79,0.12);transition:transform .22s ease, background .22s ease}
+    .btn:hover{transform:translateY(-3px);background:#3bb462}
+    .btn.ghost{background:transparent;color:var(--accent-2);border:2px solid rgba(43,108,176,0.08);font-weight:700}
+    .counter-row{display:flex;gap:12px;margin-top:18px}
+
+    /* small card components */
+    .features{display:flex;gap:12px;margin-top:18px}
+    .feature{flex:1;background:linear-gradient(180deg,#fff, #fbfffb);padding:12px;border-radius:10px;border:1px solid rgba(15,23,42,0.04);min-height:64px;transition:transform 0.3s ease,background 0.3s ease}
+    .feature:hover{transform:translateY(-4px);background:linear-gradient(180deg,#f2fff5,#ffffff)}
+
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 8px 30px rgba(15,23,42,0.03);transition:transform 0.4s ease, box-shadow 0.4s ease}
+    .card:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(15,23,42,0.06)}
+
+    /* sections reveal */
+    section{margin-top:36px;opacity:0;transform:translateY(20px);transition:all 0.9s cubic-bezier(.2,.9,.2,1)}
+    section.visible{opacity:1;transform:translateY(0)}
+
+    h2{margin:0 0 8px;font-size:20px;position:relative}
+    h2::after{content:'';display:block;width:40px;height:3px;background:var(--accent);margin-top:6px;border-radius:2px}
+
+    /* gallery */
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .gallery img{width:100%;height:170px;object-fit:cover;border-radius:10px;transition:transform 0.45s ease,box-shadow 0.45s ease;cursor:pointer}
+    .gallery img:hover{transform:scale(1.05);box-shadow:0 12px 26px rgba(15,23,42,0.15)}
+
+    /* timeline / itinerary */
+    .timeline{display:flex;flex-direction:column;gap:14px;margin-top:12px}
+    .timeline-item{display:flex;gap:12px;align-items:flex-start}
+    .timeline-item .circle{width:14px;height:14px;border-radius:50%;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 6px 18px rgba(43,108,176,0.08)}
+
+    /* testimonials */
+    .testimonials{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .testimonial{padding:14px;border-radius:12px;background:linear-gradient(180deg,#fff,#f7fff7);box-shadow:0 8px 22px rgba(15,23,42,0.02)}
+
+    /* forms */
+    form{display:grid;gap:12px}
+    input,select,textarea{padding:10px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);font-size:14px;transition:box-shadow 0.3s ease,border 0.3s ease}
+    input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 6px 18px rgba(47,158,79,0.12);outline:none}
+    .form-row{display:flex;gap:8px;flex-wrap:wrap}
+
+    /* cta strip */
+    .cta-strip{background:linear-gradient(90deg,rgba(47,158,79,0.12), rgba(43,108,176,0.06));padding:18px;border-radius:12px;margin-top:24px;display:flex;align-items:center;justify-content:space-between;transition:all 0.4s ease}
+    .cta-strip:hover{background:linear-gradient(90deg,rgba(47,158,79,0.18), rgba(43,108,176,0.08))}
+
+    /* modal */
+    .modal{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:flex;align-items:center;justify-content:center;padding:20px;z-index:999;backdrop-filter: blur(4px)}
+    .modal.hidden{display:none}
+    .modal .frame{max-width:1100px;width:100%;border-radius:12px;overflow:hidden}
+
+    /* responsive */
+    @media (max-width:1000px){
+      .hero{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:repeat(2,1fr)}
+      .testimonials{grid-template-columns:1fr}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:560px){
+      .gallery img{height:120px}
+      .logo-badge{width:44px;height:44px}
+      .container{padding:16px}
+      .grid-3{grid-template-columns:1fr}
+    }
+
+    /* subtle micro-interactions */
+    a,button{transition:all .18s ease}
+    .micro-pop{display:inline-block;transform-origin:center center}
+    .micro-pop:hover{transform:scale(1.03)}
+
+    /* decorative background image + haze (photo background, no leaves) */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop') center bottom / cover no-repeat;
+      filter: brightness(0.8) saturate(1.05);
+      z-index: -3;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(to top, rgba(247, 251, 247, 0.92), rgba(247, 251, 247, 0.36));
+      z-index: -2;
+    }
+
+    /* modal specific for join popup (custom) */
+    .join-modal { position: fixed; inset:0; display:flex; align-items:center; justify-content:center; z-index:1200; background: rgba(0,0,0,0.6); }
+    .join-modal.hidden { display:none; }
+    .join-box { background:var(--card); border-radius:12px; padding:20px; width:440px; max-width:94%; box-shadow:0 20px 50px rgba(0,0,0,0.25); position:relative; }
+    .join-box h3{margin-top:0}
+    .join-close{ position:absolute; right:12px; top:10px; border:none; background:none; font-size:22px; cursor:pointer; color:#333 }
+
+    /* keep small util */
+    .muted{color:var(--muted);font-size:13px}
+
+    /* caption styling inside the gallery modal */
+    #modalCaption { font-size:14px; color:var(--muted); margin-top:10px; text-align:center; line-height:1.3; }
+
+    /* ===== Mobile App / WebView Adaptation ===== */
+
+/* safer viewport for mobile browsers */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* tap-friendly */
+button, a, input, select, textarea {
+  touch-action: manipulation;
+}
+
+/* HERO */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 24px;
+    line-height: 1.15;
+  }
+
+  .lead {
+    font-size: 14px;
+  }
+
+  .hero {
+    padding: 12px 0;
+  }
+
+  .hero-meta {
+    flex-direction: column;
+  }
+
+  .hero-card {
+    padding: 16px;
+  }
+}
+
+/* grids -> single column */
+@media (max-width: 768px) {
+  .grid-3,
+  .testimonials,
+  .gallery {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* cards spacing */
+@media (max-width: 768px) {
+  .card {
+    padding: 14px;
+  }
+
+  section {
+    margin-top: 20px;
+  }
+}
+
+/* gallery images */
+@media (max-width: 768px) {
+  .gallery img {
+    height: 200px;
+  }
+}
+
+/* timeline */
+@media (max-width: 768px) {
+  .timeline-item {
+    flex-direction: column;
+  }
+}
+
+/* buttons */
+@media (max-width: 768px) {
+  .btn {
+    width: 100%;
+    text-align: center;
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+
+  .btn.ghost {
+    width: 100%;
+  }
+}
+
+/* forms */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 16px; /* important for iOS */
+  }
+}
+
+/* join modal */
+@media (max-width: 768px) {
+  .join-box {
+    width: 100%;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+}
+
+/* gallery modal */
+@media (max-width: 768px) {
+  .modal .frame {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+}
+
+/* footer */
+@media (max-width: 768px) {
+  footer div {
+    text-align: left !important;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="logo" aria-hidden="false">
+        <div class="logo-badge micro-pop" aria-hidden="true" style="background:none;box-shadow:none;">
+          <img src="ава.png" alt="Логотип Зелёный Бурабай" style="width:56px;height:56px;border-radius:12px;object-fit:contain;">
+        </div>
+        <div>
+          <div style="font-weight:800">Эко-курорт «Зелёный Бурабай»</div>
+          <div style="font-size:14px;color:var(--muted)">волонтёрские туры — Щучинск • Бурабай • охрана природы</div>
+        </div>
+      </div>
+      <nav aria-label="Главная навигация">
+        <a href="#about">О проекте</a>
+        <a href="#program">Программа</a>
+        <a href="#gallery">Галерея</a>
+        <a href="#team">Команда</a>
+        <!-- шапочная кнопка теперь просто скроллит к форме -->
+        <a href="#join" class="cta">Записаться</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero" aria-label="Главный блок">
+        <div class="hero-card" role="region" aria-labelledby="hero-title">
+          <div class="pill">Волонтёрский эко-тур</div>
+          <h1 id="hero-title">Посади дерево. Сохрани память. Отдохни душой в Бурабае</h1>
+          <p class="lead">Интерактивные волонтёрские программы в Щучинске и национальном парке Бурабай. Работа в природе, экскурсии, комфортное размещение и новые друзья.</p>
+
+          <div class="hero-meta" aria-hidden="true">
+            <div class="meta-card">
+              <strong>Длительность</strong>
+              <div style="color:var(--muted)">5 • 7 • 14 дней</div>
+            </div>
+            <div class="meta-card">
+              <strong>Формат</strong>
+              <div style="color:var(--muted)">Практика, лекции, экскурсии</div>
+            </div>
+            <div class="meta-card">
+              <strong>Подходит</strong>
+              <div style="color:var(--muted)">от 16 лет, семьи, студенты</div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap">
+            <!-- только эта кнопка открывает модалку -->
+            <a href="#" class="btn micro-pop open-hero-join">Записаться</a>
+            <a href="#program" class="btn ghost micro-pop">Узнать программу</a>
+          </div>
+
+          <div class="counter-row" aria-hidden="false">
+            <div class="card" style="flex:1;text-align:center">
+              <strong id="c1" style="display:block;font-size:22px">0</strong>
+              <span style="color:var(--muted)">посажено деревьев</span>
+            </div>
+            <div class="card" style="flex:1;text-align:center">
+              <strong id="c2" style="display:block;font-size:22px">0</strong>
+              <span style="color:var(--muted)">волонтёров</span>
+            </div>
+            <div class="card" style="flex:1;text-align:center">
+              <strong id="c3" style="display:block;font-size:22px">0</strong>
+              <span style="color:var(--muted)">проведено акций</span>
+            </div>
+          </div>
+
+        </div>
+
+        <aside class="hero-card" aria-label="Быстрая информация">
+          <h3 style="margin-top:0">Ближайшие заезды</h3>
+          <ul style="padding-left:0;list-style:none;margin:0;color:var(--muted)">
+            <li style="margin-bottom:8px"><strong>12–18 июня</strong> — 7 дней (Глубокая программа)</li>
+            <li style="margin-bottom:8px"><strong>4–8 августа</strong> — 5 дней (Эко-выходные)</li>
+            <li style="margin-bottom:8px"><strong>1–14 сентября</strong> — 14 дней (Волонтёрский курс)</li>
+          </ul>
+
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
+            <div style="font-weight:700">Цена от <span style="color:var(--accent);">100 000 ₸</span></div>
+            <a class="btn ghost micro-pop" id="open-info" href="#program">Смотреть подробнее</a>
+          </div>
+        </aside>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="card" aria-labelledby="about-title">
+        <h2 id="about-title">О проекте</h2>
+        <p>«Зелёный Бурабай» — совместная инициатива местных НКО, добровольцев и природоохранных служб. Наша цель — поддержка природных и культурных объектов через практическую помощь, образовательные программы и вовлечение сообщества.</p>
+        <p>Мы проводим короткие и длительные волонтёрские смены в районе Щучинска и Бурабая (Казахстан): посадки, укрепление берегов, ремонт экологических троп, уход за малыми архитектурными формами и помощь местным музеям.</p>
+
+        <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+          <div class="card" style="flex:1;min-width:220px">
+            <h4>Наш подход</h4>
+            <ul style="color:var(--muted);font-size:13px">
+              <li>Долгосрочные проекты с повторными посещениями участков.</li>
+              <li>Обучение: мастер-классы и лекции от экологов и историков.</li>
+              <li>Ответственность: экологичные материалы и согласование с местными службами.</li>
+            </ul>
+          </div>
+          <div class="card" style="flex:1;min-width:220px">
+            <h4>Партнёры</h4>
+            <div style="color:var(--muted);font-size:13px">Местные администрации, школьные экоклубы, исследовательские центры и туристические операторы.</div>
+          </div>
+          <div class="card" style="flex:1;min-width:220px">
+            <h4>Цели</h4>
+            <div style="color:var(--muted);font-size:13px">Сохранение биоразнообразия, восстановление береговой растительности и вовлечение молодёжи в практическую экологию.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROGRAM -->
+      <section id="program" class="card" aria-labelledby="program-title">
+        <h2 id="program-title">Программа (пример 7 дней)</h2>
+        <p style="color:var(--muted)">Программа адаптируется под сезон, погоду и цели проектов. Ниже — подробный пример 7-дневного пакета.</p>
+
+        <div class="timeline" style="margin-top:12px">
+          <div class="timeline-item card">
+            <div style="display:flex;flex:1;justify-content:space-between;align-items:center">
+              <div>
+                <strong>День 1 — Прибытие и знакомство</strong>
+                <div style="color:var(--muted)">Размещение, вводный брифинг по безопасности, лёгкая прогулка по набережной Щучинска.</div>
+              </div>
+              <div class="circle" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <div class="timeline-item card">
+            <div style="display:flex;flex:1;justify-content:space-between;align-items:center">
+              <div>
+                <strong>День 2 — Озеленение</strong>
+                <div style="color:var(--muted)">Мастер-класс по посадке, подготовка почвы, посадка местных видов деревьев и кустарников.</div>
+              </div>
+              <div class="circle" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <div class="timeline-item card">
+            <div style="display:flex;flex:1;justify-content:space-between;align-items:center">
+              <div>
+                <strong>День 3 — История и культура</strong>
+                <div style="color:var(--muted)">Экскурсия по Щучинску, местные музеи, встречи с жителями и рассказы о регионе.</div>
+              </div>
+              <div class="circle" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <div class="timeline-item card">
+            <div style="display:flex;flex:1;justify-content:space-between;align-items:center">
+              <div>
+                <strong>День 4 — Уход за памятниками</strong>
+                <div style="color:var(--muted)">Уборка, установка табличек, мягкая консервация и информационные акции.</div>
+              </div>
+              <div class="circle" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <div class="timeline-item card">
+            <div style="display:flex;flex:1;justify-content:space-between;align-items:center">
+              <div>
+                <strong>День 5 — Национальный парк Бурабай</strong>
+                <div style="color:var(--muted)">Лекция натуралиста, наблюдение птиц, работа по укреплению береговой растительности и благоустройство троп.</div>
+              </div>
+              <div class="circle" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <div class="timeline-item card">
+            <div style="display:flex;flex:1;justify-content:space-between;align-items:center">
+              <div>
+                <strong>День 6 — Мониторинг и сбор данных</strong>
+                <div style="color:var(--muted)">Фотофиксация, ведение полевых журналов, обучение простому мониторингу экосистем.</div>
+              </div>
+              <div class="circle" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <div class="timeline-item card">
+            <div style="display:flex;flex:1;justify-content:space-between;align-items:center">
+              <div>
+                <strong>День 7 — Итоги и отъезд</strong>
+                <div style="color:var(--muted)">Подведение результатов, вручение сертификатов и обсуждение дальнейших шагов.</div>
+              </div>
+              <div class="circle" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn open-hero-join" href="#">Записаться на 7-дневный тур</a>
+          <a class="btn ghost" href="#faq">Частые вопросы</a>
+        </div>
+      </section>
+
+      <!-- ITINERARY -->
+      <section id="itinerary" class="card" aria-labelledby="itinerary-title">
+        <h2 id="itinerary-title">Маршрут: Щучинск — Бурабай</h2>
+        <p style="color:var(--muted)">Краткая информация о ключевых точках и достопримечательностях, которые вы посетите и за которыми сможете ухаживать.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
+          <div>
+            <h3>Щучинск</h3>
+            <ul style="list-style:none;padding:0;margin:0">
+              <li style="padding:10px 0;border-bottom:1px dashed rgba(15,23,42,0.05)"><strong>Исторический центр:</strong> прогулки, уборка, восстановление информационных панелей.</li>
+              <li style="padding:10px 0;border-bottom:1px dashed rgba(15,23,42,0.05)"><strong>Местные музеи:</strong> совместные проекты по архивированию и экспозициям.</li>
+              <li style="padding:10px 0"><strong>Природные участки у города:</strong> посадка древесных и кустарниковых пород.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Бурабай</h3>
+            <ul style="list-style:none;padding:0;margin:0">
+              <li style="padding:10px 0;border-bottom:1px dashed rgba(15,23,42,0.05)"><strong>Берега озёр:</strong> восстановление растительности и борьба с эрозией.</li>
+              <li style="padding:10px 0;border-bottom:1px dashed rgba(15,23,42,0.05)"><strong>Пешеходные тропы:</strong> ремонт настилов, установка указателей, уборка.</li>
+              <li style="padding:10px 0"><strong>Образовательные зоны:</strong> площадки для лекций и мастер-классов.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <h4>Благоустройство и устойчивость</h4>
+          <p style="color:var(--muted)">Мы используем экологичные материалы для табличек и настилов, сотрудничаем с дендрологами при выборе пород. Проекты согласуются с администрацией парка и местными сообществами.</p>
+        </div>
+      </section>
+
+      <!-- TEAM -->
+      <section id="team" class="card" aria-labelledby="team-title">
+        <h2 id="team-title">Наша команда</h2>
+        <div class="grid-3">
+          <div class="card">
+            <h3>Айжан Нурланова</h3>
+            <p>Координатор программы, эколог с 10-летним опытом. Руководит проектами по восстановлению лесов и взаимодействует с партнёрами.</p>
+          </div>
+          <div class="card">
+            <h3>Ильнур Сагдиев</h3>
+            <p>Гид и историк — проводит экскурсии по Щучинску и Бурабаю, рассказывает о культуре и легендах региона.</p>
+          </div>
+          <div class="card">
+            <h3>Мария Иванова</h3>
+            <p>Инструктор по безопасности и волонтёрскому этикету. Обучает практическим навыкам и следит за комфортом группы.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- GALLERY -->
+      <section id="gallery" class="card" aria-labelledby="gallery-title">
+        <h2 id="gallery-title">Галерея</h2>
+        <p style="color:var(--muted)">Фото с прошлых заездов и природные виды региона. Нажмите на изображение, чтобы увеличить — под фото откроется подробная подпись.</p>
+
+        <div class="gallery" style="margin-top:12px">
+          <!-- Each image has a data-large (for modal image) and data-caption (detailed description shown in modal) -->
+          <img alt="Окжетпес — гранитная скала в сердце Бурабая" src="1.jpg" data-large="1.jpg"
+               data-caption="Окжетпес — знаменитая гранитная скала Бурабайской группы; символ региона, место легенд и красивых видов."/>
+          <img alt="Монумент 'Золотой воин' — мемориал в окрестностях" src="2.jpg" data-large="2.jpg"
+               data-caption="Монумент «Золотой воин» — памятный знак, посвящённый истории и культурному наследию региона."/>
+          <img alt="Жумбактас — причудливая скальная формация" src="3.jpg" data-large="3.jpg"
+               data-caption="Жумбактас (касаясь — слышны легенды) — одна из знаменитых скал Бурабая, привлекающая туристов и фотографов."/>
+          <img alt="Лыжный трамплин в Щучинске — вид на спортивную зону" src="4.jpg" data-large="4.jpg"
+               data-caption="Лыжный трамплин в Щучинске — спортивная площадка и локальная достопримечательность с панорамными видами."/>
+          <img alt="Скульптура 'Мыслитель' — арт-объект в Щучинске" src="5.jpg" data-large="5.jpg"
+               data-caption="Скульптура «Мыслитель» — местный арт-объект, часто используемый как точка встречи и фотофон."/>
+          <img alt="Дорога в Бурабай — живописный подъезд к национальному парку" src="6.jpg" data-large="6.jpg"
+               data-caption="Дорога в Бурабай — живописный подъезд, открывающий виды на озёра и леса национального парка."/>
+        </div>
+      </section>
+
+      <!-- STORIES / TESTIMONIALS -->
+      <section id="stories" class="card" aria-labelledby="stories-title">
+        <h2 id="stories-title">Истории волонтёров</h2>
+        <div class="testimonials" style="margin-top:12px">
+          <div class="testimonial">
+            <strong>Алия, 24 года</strong>
+            <div style="color:var(--muted);margin-top:8px">"Это был лучший опыт — посадили 50 саженцев, услышали удивительные истории местных жителей и в конце получили сертификат. Атмосфера как в большой семье."</div>
+          </div>
+          <div class="testimonial">
+            <strong>Ербол, 32 года</strong>
+            <div style="color:var(--muted);margin-top:8px">"Привёл студентов — ребята получили практические навыки, а парк стал немного чище. Спасибо организаторам за четкую логистику."</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- JOIN / SIGNUP (оставляем эту форму на странице — она останется и будет синхронизирована с модалкой) -->
+      <section id="join" class="card" aria-labelledby="join-title">
+        <h2 id="join-title">Присоединиться к туру</h2>
+        <p style="color:var(--muted)">Заполните форму — мы свяжемся и поможем подобрать пакет. Возможна частичная оплата и групповое бронирование.</p>
+
+        <!-- нижняя форма, оставляем как основную -->
+        <form id="signup" style="margin-top:12px;display:grid;gap:10px" onsubmit="return handleSubmit(event)" aria-label="Форма записи">
+          <div class="form-row">
+            <input type="text" id="name" name="name" placeholder="ФИО*" required />
+            <input type="email" id="email" name="email" placeholder="E-mail*" required />
+          </div>
+          <div class="form-row">
+            <input type="text" id="phone" name="phone" placeholder="Телефон (WhatsApp)"/>
+            <select id="package" name="package" aria-label="Выберите пакет">
+              <option value="5">5 дней — Эко-выходные</option>
+              <option value="7" selected>7 дней — Глубокая программа</option>
+              <option value="14">14 дней — Волонтёрский курс</option>
+            </select>
+          </div>
+          <textarea id="notes" name="notes" rows="4" placeholder="Коротко о себе, пожелания и даты"></textarea>
+          <div style="display:flex;gap:8px;align-items:center">
+            <label style="font-size:13px"><input type="checkbox" id="agree" name="agree" required/> Я согласен(на) с правилами участия</label>
+            <div style="margin-left:auto"><button class="btn" type="submit">Отправить заявку</button></div>
+          </div>
+          <div id="msg" role="status" aria-live="polite" style="color:var(--accent);font-weight:700"></div>
+        </form>
+
+        <div style="margin-top:12px;color:var(--muted);font-size:13px">Контактная почта: <a href="mailto:info@zelenyburabay.kz">info@zelenyburabay.kz</a> • Телефон: +7 (701) 000-0000</div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="card" aria-labelledby="faq-title">
+        <h2 id="faq-title">Частые вопросы</h2>
+        <details style="margin-top:8px"><summary><strong>Нужен ли опыт?</strong></summary><div style="color:var(--muted);margin-top:8px">Нет — все инструктируют на месте. Важно иметь желание помогать и базовую физическую подготовку.</div></details>
+        <details style="margin-top:8px"><summary><strong>Какое питание?</strong></summary><div style="color:var(--muted);margin-top:8px">Трёхразовое питание с учётом вегетарианских запросов. Можно согласовать особые диеты заранее.</div></details>
+        <details style="margin-top:8px"><summary><strong>Есть ли возрастные ограничения?</strong></summary><div style="color:var(--muted);margin-top:8px">Минимально 16 лет при сопровождении взрослого. Для групп старше 60 лет возможны облегчённые программы.</div></details>
+        <details style="margin-top:8px"><summary><strong>Страховка?</strong></summary><div style="color:var(--muted);margin-top:8px">Базовая страховая защита включена. Для расширенной страховки посоветуем надёжного провайдера.</div></details>
+      </section>
+
+      <!-- PARTNERS -->
+      <section id="partners" class="card" aria-labelledby="partners-title">
+        <h2 id="partners-title">Партнёры и поддержка</h2>
+        <p style="color:var(--muted);margin-top:6px">Мы работаем с НКО, научными центрами и местными властями. Хотите сотрудничать? Пишите — обсудим проекты и гранты.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+          <div style="padding:12px;border-radius:8px;background:#fff;min-width:160px;text-align:center">НКО «Чистый берег»</div>
+          <div style="padding:12px;border-radius:8px;background:#fff;min-width:160px;text-align:center">Школьные экоклубы Щучинска</div>
+          <div style="padding:12px;border-radius:8px;background:#fff;min-width:160px;text-align:center">Нацпарк Бурабай</div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+        <div>
+          <strong>Эко-курорт «Зелёный Бурабай»</strong>
+          <div style="color:var(--muted);font-size:13px">Щучинск и национальный парк Бурабай, Казахстан — партнеры: локальные НКО и администрации.</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:13px">Контакт: <a href="mailto:info@zelenyburabay.kz">info@zelenyburabay.kz</a> • +7 (701) 000-0000</div>
+          <div style="margin-top:8px;color:var(--muted);font-size:12px">© 2025 — Все права защищены</div>
+          <div style="margin-top:6px;color:var(--muted);font-size:12px">Следите за нами: <a href="#" style="color:var(--accent)">Instagram</a> • <a href="#" style="color:var(--accent)">Telegram</a></div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Modal for gallery images (with caption) -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Изображение">
+    <div class="frame card" style="padding:12px;max-width:1100px;position:relative">
+      <button id="closeModal" style="position:absolute;right:12px;top:8px;background:transparent;border:none;font-size:28px;line-height:1;color:#222;cursor:pointer">×</button>
+      <img id="modalImg" src="" alt="" style="width:100%;height:auto;border-radius:8px;display:block;margin-top:6px"/>
+      <div id="modalCaption" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <!-- NEW: Join modal (popup) — появляется только при клике в hero -->
+  <div id="joinModal" class="join-modal hidden" role="dialog" aria-modal="true" aria-labelledby="joinModalTitle">
+    <div class="join-box" role="document">
+      <button class="join-close" id="closeJoinModal" aria-label="Закрыть">×</button>
+      <h3 id="joinModalTitle">Записаться на тур</h3>
+      <p class="muted">Заполните форму — мы свяжемся и подтвердим вашу заявку.</p>
+      <!-- модалка предоставляет ту же форму, но при отправке переносит данные в основную форму и вызывает её обработчик -->
+      <form id="signupModal" style="margin-top:8px;display:grid;gap:8px" aria-label="Модальная форма записи">
+        <input type="text" name="m_name" id="m_name" placeholder="ФИО*" required />
+        <input type="email" name="m_email" id="m_email" placeholder="E-mail*" required />
+        <input type="text" name="m_phone" id="m_phone" placeholder="Телефон (WhatsApp)"/>
+        <select id="m_package" name="m_package" aria-label="Пакет">
+          <option value="5">5 дней — Эко-выходные</option>
+          <option value="7" selected>7 дней — Глубокая программа</option>
+          <option value="14">14 дней — Волонтёрский курс</option>
+        </select>
+        <textarea id="m_notes" name="m_notes" rows="3" placeholder="Коротко о себе, пожелания и даты"></textarea>
+        <div style="display:flex;align-items:center;gap:8px">
+          <label style="font-size:13px"><input type="checkbox" id="m_agree" required/> Я согласен(на) с правилами участия</label>
+          <div style="margin-left:auto"><button class="btn" type="submit" style="min-width:120px">Отправить</button></div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // --- Scroll reveal for sections ---
+    (function(){
+      const sections = document.querySelectorAll('section');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold: 0.18 });
+      sections.forEach(s => observer.observe(s));
+    })();
+
+    // --- Counters animation (simple) ---
+    function animateCounter(id, to, duration) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      let start = 0;
+      const step = Math.max(1, Math.floor(to / (duration / 30)));
+      const timer = setInterval(() => {
+        start += step;
+        if (start >= to) {
+          el.textContent = to.toLocaleString();
+          clearInterval(timer);
+        } else {
+          el.textContent = start.toLocaleString();
+        }
+      }, 30);
+    }
+
+    // --- DOMContentLoaded main init ---
+    document.addEventListener('DOMContentLoaded', () => {
+      // Counters
+      animateCounter('c1', 4280, 1600);
+      animateCounter('c2', 1120, 1600);
+      animateCounter('c3', 72, 1200);
+
+      // Gallery modal interactions (with caption)
+      document.querySelectorAll('.gallery img').forEach(img => {
+        img.addEventListener('click', () => {
+          const modal = document.getElementById('modal');
+          const modalImg = document.getElementById('modalImg');
+          const caption = document.getElementById('modalCaption');
+          modalImg.src = img.dataset.large || img.src;
+          modalImg.alt = img.alt || "";
+          // Use data-caption if provided, otherwise use alt text
+          const detailed = img.dataset.caption || img.alt || "";
+          if (caption) caption.textContent = detailed;
+          modal.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+          // scroll caption into view if necessary (small devices)
+          setTimeout(() => {
+            if (caption) caption.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 120);
+        });
+      });
+
+      // Gallery modal close handlers
+      const closeModalBtn = document.getElementById('closeModal');
+      if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', () => {
+          const modal = document.getElementById('modal');
+          if (modal) {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+            const caption = document.getElementById('modalCaption');
+            if (caption) caption.textContent = '';
+            const modalImg = document.getElementById('modalImg');
+            if (modalImg) modalImg.src = '';
+          }
+        });
+      }
+      const modalOverlay = document.getElementById('modal');
+      if (modalOverlay) {
+        modalOverlay.addEventListener('click', (e) => {
+          if (e.target && e.target.id === 'modal') {
+            modalOverlay.classList.add('hidden');
+            document.body.style.overflow = '';
+            const caption = document.getElementById('modalCaption');
+            if (caption) caption.textContent = '';
+            const modalImg = document.getElementById('modalImg');
+            if (modalImg) modalImg.src = '';
+          }
+        });
+      }
+
+      // Smooth-scroll from "Смотреть подробнее"
+      const openInfoBtn = document.getElementById('open-info');
+      if (openInfoBtn) {
+        openInfoBtn.addEventListener('click', (e) => {
+          const el = document.getElementById('program');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+
+      // Restore simple saved form values (UX convenience for bottom form)
+      try {
+        const saved = JSON.parse(localStorage.getItem('vb_form') || '{}');
+        if (saved && Object.keys(saved).length) {
+          ['name','email','phone','notes','package'].forEach(k => {
+            const el = document.getElementById(k);
+            if (el && saved[k]) el.value = saved[k];
+          });
+        }
+      } catch (e) { /* ignore */ }
+    });
+
+    // --- Form submit (client-side fake handler) ---
+    function handleSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const agree = document.getElementById('agree') ? document.getElementById('agree').checked : true;
+      const msg = document.getElementById('msg');
+      if (!name || !email || !agree) {
+        if (msg) {
+          msg.textContent = 'Пожалуйста, заполните обязательные поля и подтвердите правила.';
+          msg.style.color = 'crimson';
+        } else {
+          alert('Пожалуйста, заполните обязательные поля и подтвердите правила.');
+        }
+        return false;
+      }
+      // Save to localStorage as convenience
+      const payload = {
+        name, email,
+        phone: document.getElementById('phone') ? document.getElementById('phone').value : '',
+        notes: document.getElementById('notes') ? document.getElementById('notes').value : '',
+        package: document.getElementById('package') ? document.getElementById('package').value : ''
+      };
+      try { localStorage.setItem('vb_form', JSON.stringify(payload)); } catch (e) { /* ignore */ }
+
+      if (msg) {
+        msg.textContent = 'Заявка принята! Мы свяжемся с вами в ближайшее время.';
+        msg.style.color = 'var(--accent)';
+      } else {
+        alert('Заявка принята! Мы свяжемся с вами в ближайшее время.');
+      }
+
+      // Visual confirmation and reset after a while
+      setTimeout(() => {
+        const form = document.getElementById('signup');
+        if (form) form.reset();
+        if (msg) msg.textContent = '';
+      }, 4500);
+
+      return false;
+    }
+
+    // --- Accessibility: close gallery/join modal with Esc ---
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const modal = document.getElementById('modal');
+        if (modal && !modal.classList.contains('hidden')) {
+          modal.classList.add('hidden');
+          document.body.style.overflow = '';
+          const caption = document.getElementById('modalCaption');
+          if (caption) caption.textContent = '';
+          const modalImg = document.getElementById('modalImg');
+          if (modalImg) modalImg.src = '';
+        }
+        // close join modal too if open
+        const jm = document.getElementById('joinModal');
+        if (jm && !jm.classList.contains('hidden')) {
+          jm.classList.add('hidden');
+          document.body.style.overflow = '';
+        }
+      }
+    });
+
+    // --- JOIN MODAL LOGIC (opens only from hero button with .open-hero-join) ---
+    (function(){
+      const openers = document.querySelectorAll('.open-hero-join');
+      const joinModal = document.getElementById('joinModal');
+      const closeJoinModal = document.getElementById('closeJoinModal');
+      const signupForm = document.getElementById('signup');        // основная форма внизу
+      const modalForm = document.getElementById('signupModal');   // форма внутри модалки
+
+      function openJoinModal(e){
+        if (e) e.preventDefault();
+        // sync data from main form -> modal form
+        try {
+          const map = [
+            ['name', 'm_name'],
+            ['email', 'm_email'],
+            ['phone', 'm_phone'],
+            ['package', 'm_package'],
+            ['notes', 'm_notes']
+          ];
+          map.forEach(([mainField, modalField]) => {
+            const mainEl = document.getElementById(mainField);
+            const modalEl = document.getElementById(modalField);
+            if (mainEl && modalEl) modalEl.value = mainEl.value || '';
+          });
+          // checkbox sync
+          const mainAgree = document.getElementById('agree');
+          const modAgree = document.getElementById('m_agree');
+          if (mainAgree && modAgree) modAgree.checked = mainAgree.checked;
+        } catch (err) { /* ignore */ }
+
+        if (joinModal) {
+          joinModal.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+          // focus first input for a11y
+          const first = document.querySelector('#signupModal input, #signupModal textarea, #signupModal select');
+          if (first) first.focus();
+        }
+      }
+
+      // attach openers (only hero buttons)
+      openers.forEach(op => {
+        op.addEventListener('click', openJoinModal);
+      });
+
+      // close via button
+      if (closeJoinModal) {
+        closeJoinModal.addEventListener('click', () => {
+          if (joinModal) {
+            joinModal.classList.add('hidden');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+
+      // close by clicking outside
+      if (joinModal) {
+        joinModal.addEventListener('click', (e) => {
+          if (e.target && e.target.id === 'joinModal') {
+            joinModal.classList.add('hidden');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+
+      // When modal form is submitted: copy values into main form and trigger its submit handler
+      if (modalForm && signupForm) {
+        modalForm.addEventListener('submit', function(e){
+          e.preventDefault();
+          // copy values modal -> main
+          try {
+            const map = [
+              ['m_name', 'name'],
+              ['m_email', 'email'],
+              ['m_phone', 'phone'],
+              ['m_package', 'package'],
+              ['m_notes', 'notes']
+            ];
+            map.forEach(([modalField, mainField]) => {
+              const modalEl = document.getElementById(modalField);
+              const mainEl = document.getElementById(mainField);
+              if (modalEl && mainEl) mainEl.value = modalEl.value;
+            });
+            // checkbox
+            const modAgree = document.getElementById('m_agree');
+            const mainAgree = document.getElementById('agree');
+            if (modAgree && mainAgree) mainAgree.checked = modAgree.checked;
+          } catch (err) { /* ignore */ }
+
+          // close modal visually
+          if (joinModal) {
+            joinModal.classList.add('hidden');
+            document.body.style.overflow = '';
+          }
+
+          // trigger main form submit (this will call handleSubmit via onsubmit attribute)
+          // Use requestSubmit if available to ensure constraint validation happens
+          if (typeof signupForm.requestSubmit === 'function') {
+            signupForm.requestSubmit();
+          } else {
+            // fallback
+            signupForm.submit();
+          }
+        });
+      }
+    })();
+
+    // --- Additional safety: avoid JS errors if elements missing elsewhere ---
+    (function(){
+      // wrapper to avoid top-level errors if some optional elements are missing
+    })();
+  </script>
+</body>
+</html>
