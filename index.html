@@ -32,13 +32,13 @@
     header .logo{display:flex;gap:12px;align-items:center}
     .logo-badge{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;transition:transform 0.4s ease, box-shadow .4s ease}
     .logo-badge:hover{transform:rotate(8deg) scale(1.06);box-shadow:0 14px 30px rgba(47,158,79,0.12)}
-    nav a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600;position:relative;transition:color 0.3s ease}
+    nav a{margin:18px;color:var(--muted);text-decoration:none;font-weight:600;position:relative;transition:color 0.3s ease}
     nav a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:3px;background:var(--accent);transition:width 0.28s ease}
     nav a:hover{color:var(--accent)}
     nav a:hover::after{width:100%}
-    nav a.cta{background:var(--accent);color:#fff;padding:8px 12px;border-radius:10px;box-shadow:0 10px 20px rgba(47,158,79,0.08)}
+    nav a.cta{background:var(--accent);color:#fff;padding:8px 12px;border-radius:50px;box-shadow:0 10px 20px rgba(47,158,79,0.08)}
     nav a.cta:hover{transform:translateY(-3px)}
-
+    .Menu{padding:10px;margin:0 auto;position:relative;z-index:2;gap:20px;}
     /* Hero */
     .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:28px 0}
     .hero-card{background:var(--card);border-radius:var(--radius);padding:28px;box-shadow:0 8px 30px rgba(15,23,42,0.06);transition:transform 0.4s ease, box-shadow 0.4s ease}
@@ -52,7 +52,7 @@
     .btn{display:inline-block;padding:10px 18px;border-radius:12px;background:var(--accent);color:#fff;text-decoration:none;font-weight:800;letter-spacing:0.2px;box-shadow:0 10px 28px rgba(47,158,79,0.12);transition:transform .22s ease, background .22s ease}
     .btn:hover{transform:translateY(-3px);background:#3bb462}
     .btn.ghost{background:transparent;color:var(--accent-2);border:2px solid rgba(43,108,176,0.08);font-weight:700}
-    .counter-row{display:flex;gap:12px;margin-top:18px}
+    .counter-row{display:flex;gap:12px;margin-top:18px;margin:0 auto;padding:16px;position:relative;z-index:2;}
 
     /* small card components */
     .features{display:flex;gap:12px;margin-top:18px}
@@ -91,7 +91,7 @@
     .form-row{display:flex;gap:8px;flex-wrap:wrap}
 
     /* cta strip */
-    .cta-strip{background:linear-gradient(90deg,rgba(47,158,79,0.12), rgba(43,108,176,0.06));padding:18px;border-radius:12px;margin-top:24px;display:flex;align-items:center;justify-content:space-between;transition:all 0.4s ease}
+    .cta-strip{background:linear-gradient(90deg,rgba(47,158,79,0.12), rgba(43,108,176,0.06));padding:18px;border-radius:12px;margin-top: 24px;display:flex;align-items:center;justify-content:space-between;transition:all 0.4s ease}
     .cta-strip:hover{background:linear-gradient(90deg,rgba(47,158,79,0.18), rgba(43,108,176,0.08))}
 
     /* modal */
@@ -148,7 +148,7 @@
     /* caption styling inside the gallery modal */
     #modalCaption { font-size:14px; color:var(--muted); margin-top:10px; text-align:center; line-height:1.3; }
 
-    /* ===== Mobile App / WebView Adaptation ===== */
+/* ===== Mobile App / WebView Adaptation ===== */
 
 /* safer viewport for mobile browsers */
 html, body {
@@ -271,6 +271,301 @@ button, a, input, select, textarea {
     text-align: left !important;
   }
 }
+
+/* ===== MOBILE HAMBURGER MENU ===== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background: var(--card);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1001;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2.5px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  margin: 3px 0;
+}
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.mobile-nav-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 280px;
+  max-width: 85vw;
+  height: 100vh;
+  background: var(--card);
+  z-index: 1000;
+  padding: 80px 24px 24px;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+  transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+  overflow-y: auto;
+  transform: translateX(100%);
+}
+.mobile-nav.active {
+  transform: translateX(0);
+}
+.mobile-nav a {
+  display: block;
+  padding: 16px 0;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(15,23,42,0.06);
+  transition: color 0.2s ease;
+}
+.mobile-nav a:hover {
+  color: var(--accent);
+}
+.mobile-nav a.cta {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 14px 24px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 12px;
+  text-align: center;
+  width: 100%;
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+  }
+  .mobile-nav-overlay {
+    display: block;
+  }
+  nav.Menu {
+    display: none !important;
+  }
+  header {
+    padding: 12px 0;
+  }
+  .logo > div:last-child > div:last-child {
+    display: none;
+  }
+  .logo > div:last-child > div:first-child {
+    font-size: 14px;
+  }
+  .logo-badge, .logo-badge img {
+    width: 42px !important;
+    height: 42px !important;
+  }
+  
+  h1 {
+    font-size: 20px;
+  }
+  .lead {
+    font-size: 13px;
+  }
+  .pill {
+    font-size: 11px;
+    padding: 5px 8px;
+  }
+  .meta-card {
+    padding: 10px;
+    min-width: auto;
+  }
+  .meta-card strong {
+    font-size: 13px;
+  }
+  .meta-card div {
+    font-size: 12px;
+  }
+  .counter-row {
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 0;
+  }
+  .counter-row .card {
+    padding: 12px;
+  }
+  .counter-row strong {
+    font-size: 18px !important;
+  }
+  .counter-row span {
+    font-size: 11px;
+  }
+  h2 {
+    font-size: 18px;
+  }
+  h3 {
+    font-size: 16px;
+  }
+  h4 {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .card {
+    padding: 14px;
+  }
+  section.card {
+    padding: 16px;
+  }
+  p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  ul, ol {
+    padding-left: 16px;
+  }
+  li {
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+  .timeline {
+    gap: 10px;
+  }
+  .timeline-item.card {
+    padding: 12px;
+  }
+  .timeline-item strong {
+    font-size: 14px;
+  }
+  .gallery {
+    gap: 6px;
+  }
+  .gallery img {
+    height: 140px;
+  }
+  .testimonial {
+    padding: 12px;
+  }
+  .testimonial strong {
+    font-size: 14px;
+  }
+  .testimonial div {
+    font-size: 12px;
+  }
+  form {
+    gap: 10px;
+  }
+  input, select, textarea {
+    padding: 12px;
+    font-size: 16px;
+  }
+  textarea {
+    min-height: 80px;
+  }
+  details summary {
+    font-size: 14px;
+    padding: 8px 0;
+  }
+  details div {
+    font-size: 13px;
+  }
+  footer > div {
+    flex-direction: column;
+    text-align: center !important;
+  }
+  footer strong {
+    font-size: 14px;
+  }
+  aside.hero-card {
+    padding: 14px;
+  }
+  aside.hero-card h3 {
+    font-size: 15px;
+  }
+  aside.hero-card ul li {
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+  .features {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .feature {
+    padding: 10px;
+    min-height: auto;
+  }
+  .cta-strip {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    padding: 14px;
+  }
+  .join-box {
+    padding: 16px;
+    margin: 12px;
+    max-height: 85vh;
+  }
+  .join-box h3 {
+    font-size: 18px;
+    padding-right: 30px;
+  }
+  .modal .frame {
+    margin: 12px;
+    padding: 10px;
+  }
+  #modalCaption {
+    font-size: 12px;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    padding: 12px;
+  }
+  h1 {
+    font-size: 18px;
+  }
+  .lead {
+    font-size: 12px;
+  }
+  .btn {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+  .counter-row strong {
+    font-size: 16px !important;
+  }
+  .gallery img {
+    height: 120px;
+  }
+}
   </style>
 </head>
 <body>
@@ -286,20 +581,32 @@ button, a, input, select, textarea {
           <div style="font-size:14px;color:var(--muted)">волонтёрские туры — Щучинск • Бурабай • охрана природы</div>
         </div>
       </div>
-      <nav aria-label="Главная навигация">
+<nav class="Menu" aria-label="Главная навигация">
         <a href="#about">О проекте</a>
         <a href="#program">Программа</a>
         <a href="#gallery">Галерея</a>
         <a href="#team">Команда</a>
-        <!-- шапочная кнопка теперь просто скроллит к форме -->
         <a href="#join" class="cta">Записаться</a>
       </nav>
+      <button class="hamburger" id="hamburger" aria-label="Открыть меню">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </header>
+    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="#about">О проекте</a>
+      <a href="#program">Программа</a>
+      <a href="#gallery">Галерея</a>
+      <a href="#team">Команда</a>
+      <a href="#join" class="cta">Записаться</a>
+    </nav>
 
     <main>
       <!-- HERO -->
-      <section class="hero" aria-label="Главный блок">
-        <div class="hero-card" role="region" aria-labelledby="hero-title">
+      <section id="about" class="card" aria-label="Главный блок">
+        <div id="hero" class="hero-card" role="region" aria-labelledby="hero-title">
           <div class="pill">Волонтёрский эко-тур</div>
           <h1 id="hero-title">Посади дерево. Сохрани память. Отдохни душой в Бурабае</h1>
           <p class="lead">Интерактивные волонтёрские программы в Щучинске и национальном парке Бурабай. Работа в природе, экскурсии, комфортное размещение и новые друзья.</p>
@@ -928,10 +1235,57 @@ button, a, input, select, textarea {
       }
     })();
 
-    // --- Additional safety: avoid JS errors if elements missing elsewhere ---
+// --- Additional safety: avoid JS errors if elements missing elsewhere ---
     (function(){
       // wrapper to avoid top-level errors if some optional elements are missing
+    })();
+
+    // --- MOBILE MENU ---
+    (function(){
+      var hamburger = document.getElementById('hamburger');
+      var mobileNav = document.getElementById('mobileNav');
+      var overlay = document.getElementById('mobileNavOverlay');
+      var links = mobileNav ? mobileNav.querySelectorAll('a') : [];
+
+      function openMenu() {
+        hamburger.classList.add('active');
+        mobileNav.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMenu() {
+        hamburger.classList.remove('active');
+        mobileNav.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      if (hamburger) {
+        hamburger.addEventListener('click', function() {
+          if (mobileNav.classList.contains('active')) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+      }
+
+      if (overlay) {
+        overlay.addEventListener('click', closeMenu);
+      }
+
+      for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', closeMenu);
+      }
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileNav && mobileNav.classList.contains('active')) {
+          closeMenu();
+        }
+      });
     })();
   </script>
 </body>
 </html>
+
