@@ -3,14 +3,15 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta charset="utf-8"/>
-  <title>Эко-курорт «Зелёный Бурабай» — волонтёрские туры в Щучинске и Бурабае</title>
+  <title>Зелёный Бурабай</title>
+  <link rel="icon" type="image/png" href="клевер.png">
   <meta name="description" content="Волонтёрский эко-тур: озеленение, уход за природой, изучение истории Щучинска и Бурабая, экскурсии и отдых." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
       --accent:#2f9e4f;
       --accent-2:#2b6cb0;
-      --muted:#000000;
+      --muted:#555;
       --bg:#f7fbf7;
       --card:#ffffff;
       --radius:14px;
@@ -18,8 +19,9 @@
     }
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:#0f172a;line-height:1.45;overflow-x:hidden;position:relative;min-height:100vh}
+    html,body{width:100%;max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%}
+    button,a,input,select,textarea{touch-action:manipulation}
 
-    /* Fade-in for main blocks */
     header,section,footer{animation:fadeIn 1s ease forwards;opacity:0}
     header{animation-delay:0.25s}
     section{animation-delay:0.6s}
@@ -27,1266 +29,1812 @@
     @keyframes fadeIn{to{opacity:1}}
 
     .container{max-width:1200px;padding:28px;margin:0 auto;position:relative;z-index:2}
-
-    header{display:flex;align-items:center;justify-content:space-between;padding:18px 0;transition:all 0.45s ease;background:transparent}
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 0;transition:all 0.45s ease;background:transparent;flex-wrap:wrap;gap:12px}
     header .logo{display:flex;gap:12px;align-items:center}
-    .logo-badge{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;transition:transform 0.4s ease, box-shadow .4s ease}
-    .logo-badge:hover{transform:rotate(8deg) scale(1.06);box-shadow:0 14px 30px rgba(47,158,79,0.12)}
-    nav a{margin:18px;color:var(--muted);text-decoration:none;font-weight:600;position:relative;transition:color 0.3s ease}
-    nav a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:3px;background:var(--accent);transition:width 0.28s ease}
+    .logo-badge{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;transition:transform 0.4s ease}
+    .logo-badge:hover{transform:rotate(8deg) scale(1.06)}
+    nav{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+    nav a{padding:6px 12px;color:#0f172a;text-decoration:none;font-weight:600;position:relative;transition:color 0.3s ease;border-radius:8px}
+    nav a::after{content:'';position:absolute;left:12px;bottom:2px;width:0;height:2px;background:var(--accent);transition:width 0.28s ease}
     nav a:hover{color:var(--accent)}
-    nav a:hover::after{width:100%}
-    nav a.cta{background:var(--accent);color:#fff;padding:8px 12px;border-radius:50px;box-shadow:0 10px 20px rgba(47,158,79,0.08)}
-    nav a.cta:hover{transform:translateY(-3px)}
-    .Menu{padding:10px;margin:0 auto;position:relative;z-index:2;gap:20px;}
-    /* Hero */
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:28px 0}
-    .hero-card{background:var(--card);border-radius:var(--radius);padding:28px;box-shadow:0 8px 30px rgba(15,23,42,0.06);transition:transform 0.4s ease, box-shadow 0.4s ease}
-    .hero-card:hover{transform:translateY(-6px);box-shadow:0 18px 48px rgba(15,23,42,0.08)}
-    h1{margin:0 0 8px;font-size:32px;line-height:1.05;letter-spacing:-0.2px}
+    nav a:hover::after{width:calc(100% - 24px)}
+    nav a.cta{background:var(--accent);color:#fff;padding:8px 14px;border-radius:50px;box-shadow:0 10px 20px rgba(47,158,79,0.25)}
+    nav a.cta:hover{transform:translateY(-2px);background:#3bb462}
+
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start;padding:28px 0}
+    .hero-card{background:var(--card);border-radius:var(--radius);padding:28px;box-shadow:0 8px 30px rgba(15,23,42,0.06);transition:transform 0.4s ease,box-shadow 0.4s ease}
+    .hero-card:hover{transform:translateY(-4px);box-shadow:0 18px 48px rgba(15,23,42,0.08)}
+    h1{margin:0 0 8px;font-size:32px;line-height:1.05}
     .lead{margin:0;color:var(--muted);font-size:15px}
-    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg, rgba(47,158,79,0.12), rgba(43,108,176,0.06));font-weight:700;color:var(--accent);font-size:13px}
-
-    .hero-meta{display:flex;gap:12px;margin-top:18px}
-    .meta-card{background:rgba(255,255,255,0.6);padding:12px;border-radius:12px;min-width:120px;backdrop-filter: blur(6px);box-shadow:0 6px 18px rgba(15,23,42,0.04)}
-    .btn{display:inline-block;padding:10px 18px;border-radius:12px;background:var(--accent);color:#fff;text-decoration:none;font-weight:800;letter-spacing:0.2px;box-shadow:0 10px 28px rgba(47,158,79,0.12);transition:transform .22s ease, background .22s ease}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,rgba(47,158,79,0.12),rgba(43,108,176,0.06));font-weight:700;color:var(--accent);font-size:13px}
+    .hero-meta{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .meta-card{background:rgba(255,255,255,0.7);padding:12px;border-radius:12px;min-width:110px;backdrop-filter:blur(6px);box-shadow:0 6px 18px rgba(15,23,42,0.04)}
+    .btn{display:inline-block;padding:10px 18px;border-radius:12px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;box-shadow:0 10px 28px rgba(47,158,79,0.12);transition:transform .22s,background .22s;border:none;cursor:pointer;font-size:14px}
     .btn:hover{transform:translateY(-3px);background:#3bb462}
-    .btn.ghost{background:transparent;color:var(--accent-2);border:2px solid rgba(43,108,176,0.08);font-weight:700}
-    .counter-row{display:flex;gap:12px;margin-top:18px;margin:0 auto;padding:16px;position:relative;z-index:2;}
+    .btn.ghost{background:transparent;color:var(--accent-2);border:2px solid rgba(43,108,176,0.2);font-weight:700}
+    .btn.ghost:hover{background:rgba(43,108,176,0.06);transform:translateY(-2px)}
+    .btn.danger{background:#e53e3e}
+    .btn.danger:hover{background:#c53030}
+    .btn.sm{padding:6px 12px;font-size:13px;border-radius:8px}
+    .counter-row{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
 
-    /* small card components */
-    .features{display:flex;gap:12px;margin-top:18px}
-    .feature{flex:1;background:linear-gradient(180deg,#fff, #fbfffb);padding:12px;border-radius:10px;border:1px solid rgba(15,23,42,0.04);min-height:64px;transition:transform 0.3s ease,background 0.3s ease}
-    .feature:hover{transform:translateY(-4px);background:linear-gradient(180deg,#f2fff5,#ffffff)}
-
+    .features{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .feature{flex:1;background:linear-gradient(180deg,#fff,#fbfffb);padding:12px;border-radius:10px;border:1px solid rgba(15,23,42,0.04);min-width:160px;transition:transform 0.3s}
+    .feature:hover{transform:translateY(-3px)}
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
-    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 8px 30px rgba(15,23,42,0.03);transition:transform 0.4s ease, box-shadow 0.4s ease}
-    .card:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(15,23,42,0.06)}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 8px 30px rgba(15,23,42,0.03);transition:transform 0.4s,box-shadow 0.4s}
+    .card:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(15,23,42,0.06)}
 
-    /* sections reveal */
     section{margin-top:36px;opacity:0;transform:translateY(20px);transition:all 0.9s cubic-bezier(.2,.9,.2,1)}
     section.visible{opacity:1;transform:translateY(0)}
-
-    h2{margin:0 0 8px;font-size:20px;position:relative}
+    h2{margin:0 0 8px;font-size:20px}
     h2::after{content:'';display:block;width:40px;height:3px;background:var(--accent);margin-top:6px;border-radius:2px}
 
-    /* gallery */
     .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-    .gallery img{width:100%;height:170px;object-fit:cover;border-radius:10px;transition:transform 0.45s ease,box-shadow 0.45s ease;cursor:pointer}
+    .gallery img{width:100%;height:170px;object-fit:cover;border-radius:10px;transition:transform 0.45s,box-shadow 0.45s;cursor:pointer}
     .gallery img:hover{transform:scale(1.05);box-shadow:0 12px 26px rgba(15,23,42,0.15)}
-
-    /* timeline / itinerary */
     .timeline{display:flex;flex-direction:column;gap:14px;margin-top:12px}
     .timeline-item{display:flex;gap:12px;align-items:flex-start}
-    .timeline-item .circle{width:14px;height:14px;border-radius:50%;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 6px 18px rgba(43,108,176,0.08)}
-
-    /* testimonials */
     .testimonials{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     .testimonial{padding:14px;border-radius:12px;background:linear-gradient(180deg,#fff,#f7fff7);box-shadow:0 8px 22px rgba(15,23,42,0.02)}
 
-    /* forms */
     form{display:grid;gap:12px}
-    input,select,textarea{padding:10px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);font-size:14px;transition:box-shadow 0.3s ease,border 0.3s ease}
-    input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 6px 18px rgba(47,158,79,0.12);outline:none}
+    input,select,textarea{padding:10px;border-radius:10px;border:1.5px solid rgba(15,23,42,0.1);font-size:14px;transition:box-shadow 0.3s,border 0.3s;width:100%;font-family:inherit;background:#fff}
+    input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(47,158,79,0.12);outline:none}
     .form-row{display:flex;gap:8px;flex-wrap:wrap}
+    .form-row>*{flex:1;min-width:180px}
 
-    /* cta strip */
-    .cta-strip{background:linear-gradient(90deg,rgba(47,158,79,0.12), rgba(43,108,176,0.06));padding:18px;border-radius:12px;margin-top: 24px;display:flex;align-items:center;justify-content:space-between;transition:all 0.4s ease}
-    .cta-strip:hover{background:linear-gradient(90deg,rgba(47,158,79,0.18), rgba(43,108,176,0.08))}
-
-    /* modal */
-    .modal{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:flex;align-items:center;justify-content:center;padding:20px;z-index:999;backdrop-filter: blur(4px)}
-    .modal.hidden{display:none}
-    .modal .frame{max-width:1100px;width:100%;border-radius:12px;overflow:hidden}
-
-    /* responsive */
-    @media (max-width:1000px){
-      .hero{grid-template-columns:1fr}
-      .grid-3{grid-template-columns:repeat(2,1fr)}
-      .testimonials{grid-template-columns:1fr}
-      .gallery{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width:560px){
-      .gallery img{height:120px}
-      .logo-badge{width:44px;height:44px}
-      .container{padding:16px}
-      .grid-3{grid-template-columns:1fr}
-    }
-
-    /* subtle micro-interactions */
+    .cta-strip{background:linear-gradient(90deg,rgba(47,158,79,0.12),rgba(43,108,176,0.06));padding:18px;border-radius:12px;margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
     a,button{transition:all .18s ease}
-    .micro-pop{display:inline-block;transform-origin:center center}
-    .micro-pop:hover{transform:scale(1.03)}
-
-    /* decorative background image + haze (photo background, no leaves) */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop') center bottom / cover no-repeat;
-      filter: brightness(0.8) saturate(1.05);
-      z-index: -3;
-    }
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(to top, rgba(247, 251, 247, 0.92), rgba(247, 251, 247, 0.36));
-      z-index: -2;
-    }
-
-    /* modal specific for join popup (custom) */
-    .join-modal { position: fixed; inset:0; display:flex; align-items:center; justify-content:center; z-index:1200; background: rgba(0,0,0,0.6); }
-    .join-modal.hidden { display:none; }
-    .join-box { background:var(--card); border-radius:12px; padding:20px; width:440px; max-width:94%; box-shadow:0 20px 50px rgba(0,0,0,0.25); position:relative; }
-    .join-box h3{margin-top:0}
-    .join-close{ position:absolute; right:12px; top:10px; border:none; background:none; font-size:22px; cursor:pointer; color:#333 }
-
-    /* keep small util */
     .muted{color:var(--muted);font-size:13px}
 
-    /* caption styling inside the gallery modal */
-    #modalCaption { font-size:14px; color:var(--muted); margin-top:10px; text-align:center; line-height:1.3; }
+    body::before{content:"";position:fixed;inset:0;background:url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop') center bottom/cover no-repeat;filter:brightness(0.8) saturate(1.05);z-index:-3}
+    body::after{content:"";position:fixed;inset:0;background:linear-gradient(to top,rgba(247,251,247,0.92),rgba(247,251,247,0.36));z-index:-2}
 
-/* ===== Mobile App / WebView Adaptation ===== */
+    /* === MODAL BASE === */
+    .overlay{position:fixed;inset:0;background:rgba(2,6,23,0.65);display:flex;align-items:center;justify-content:center;padding:20px;z-index:1100;backdrop-filter:blur(4px)}
+    .overlay.hidden{display:none}
+    .modal-box{background:var(--card);border-radius:16px;padding:28px;width:100%;max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.3)}
+    .modal-close{position:absolute;right:14px;top:12px;border:none;background:none;font-size:24px;cursor:pointer;color:#555;line-height:1;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px}
+    .modal-close:hover{background:#f1f5f9}
 
-/* safer viewport for mobile browsers */
-html, body {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  -webkit-text-size-adjust: 100%;
-}
+    /* gallery modal */
+    .modal{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:flex;align-items:center;justify-content:center;padding:20px;z-index:999;backdrop-filter:blur(4px)}
+    .modal.hidden{display:none}
+    .modal .frame{max-width:1100px;width:100%;border-radius:12px;overflow:hidden}
+    #modalCaption{font-size:14px;color:var(--muted);margin-top:10px;text-align:center}
 
-/* tap-friendly */
-button, a, input, select, textarea {
-  touch-action: manipulation;
-}
+    /* join modal */
+    .join-modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:1200;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px)}
+    .join-modal.hidden{display:none}
+    .join-box{background:var(--card);border-radius:12px;padding:24px;width:440px;max-width:94%;box-shadow:0 20px 50px rgba(0,0,0,0.25);position:relative;max-height:90vh;overflow-y:auto}
+    .join-box h3{margin-top:0}
+    .join-close{position:absolute;right:12px;top:10px;border:none;background:none;font-size:22px;cursor:pointer;color:#333}
 
-/* HERO */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 24px;
-    line-height: 1.15;
-  }
+    /* === AUTH MODAL === */
+    #authModal .modal-box{max-width:440px}
+    .auth-tabs{display:flex;gap:0;margin-bottom:20px;border-radius:10px;overflow:hidden;border:1.5px solid rgba(15,23,42,0.08)}
+    .auth-tab{flex:1;padding:10px;border:none;background:#f8fafc;cursor:pointer;font-weight:600;font-size:14px;transition:all .2s}
+    .auth-tab.active{background:var(--accent);color:#fff}
+    .auth-form{display:none}
+    .auth-form.active{display:grid;gap:10px}
 
-  .lead {
-    font-size: 14px;
-  }
+    /* === USER CABINET PANEL === */
+    #cabinetPanel .modal-box{max-width:900px;padding:0;overflow:hidden;max-height:90vh}
+    .cabinet-layout{display:flex;min-height:500px;max-height:90vh}
+    .cabinet-sidebar{width:220px;background:linear-gradient(180deg,#f8fafc,#f1f5f9);border-right:1px solid rgba(15,23,42,0.06);padding:20px 12px;flex-shrink:0;overflow-y:auto}
+    .cabinet-sidebar .user-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:20px;margin:0 auto 12px}
+    .cabinet-sidebar .user-name{text-align:center;font-weight:700;font-size:14px;margin-bottom:4px}
+    .cabinet-sidebar .user-email{text-align:center;font-size:12px;color:var(--muted);margin-bottom:16px}
+    .cabinet-nav{display:flex;flex-direction:column;gap:4px}
+    .cabinet-nav-item{padding:9px 12px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;color:#555;transition:all .2s;display:flex;align-items:center;gap:8px}
+    .cabinet-nav-item:hover{background:rgba(47,158,79,0.08);color:var(--accent)}
+    .cabinet-nav-item.active{background:var(--accent);color:#fff}
+    .cabinet-content{flex:1;padding:24px;overflow-y:auto;max-height:70vh}
+    .cabinet-section{display:none}
+    .cabinet-section.active{display:block}
 
-  .hero {
-    padding: 12px 0;
-  }
+    /* === ADMIN PANEL === */
+    #adminPanel .modal-box{max-width:1100px;padding:0;overflow:hidden}
+    .admin-layout{display:flex;min-height:600px}
+    .admin-sidebar{width:200px;background:#0f172a;padding:16px 10px;flex-shrink:0}
+    .admin-sidebar .admin-logo{color:#fff;font-weight:800;font-size:14px;padding:8px 10px;margin-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:12px}
+    .admin-nav-item{padding:9px 12px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;color:rgba(255,255,255,0.6);transition:all .2s;display:flex;align-items:center;gap:8px;margin-bottom:2px}
+    .admin-nav-item:hover{background:rgba(255,255,255,0.08);color:#fff}
+    .admin-nav-item.active{background:var(--accent);color:#fff}
+    .admin-content{flex:1;padding:24px;overflow-y:auto;background:#fafbfc}
+    .admin-section{display:none}
+    .admin-section.active{display:block}
 
-  .hero-meta {
-    flex-direction: column;
-  }
+    /* Tables */
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th{text-align:left;padding:10px 12px;background:#f1f5f9;font-weight:700;color:#333;border-bottom:2px solid #e2e8f0}
+    td{padding:10px 12px;border-bottom:1px solid #f1f5f9;color:#444;vertical-align:middle}
+    tr:hover td{background:#fafbff}
+    .badge{display:inline-block;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:700}
+    .badge.green{background:rgba(47,158,79,0.12);color:#1a6b35}
+    .badge.blue{background:rgba(43,108,176,0.12);color:#1e4a8a}
+    .badge.orange{background:rgba(237,137,54,0.15);color:#9a4a00}
+    .badge.red{background:rgba(229,62,62,0.12);color:#9b2626}
+    .badge.gray{background:#f1f5f9;color:#555}
 
-  .hero-card {
-    padding: 16px;
-  }
-}
+    /* Stars */
+    .stars{color:#f59e0b;letter-spacing:2px;font-size:16px}
 
-/* grids -> single column */
-@media (max-width: 768px) {
-  .grid-3,
-  .testimonials,
-  .gallery {
-    grid-template-columns: 1fr !important;
-  }
-}
+    /* Notification toast */
+    #toastContainer{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:10px}
+    .toast{background:#0f172a;color:#fff;padding:14px 20px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,0.25);animation:slideIn .35s ease;max-width:340px;display:flex;align-items:center;gap:10px}
+    .toast.success{border-left:4px solid var(--accent)}
+    .toast.info{border-left:4px solid var(--accent-2)}
+    .toast.warning{border-left:4px solid #f59e0b}
+    @keyframes slideIn{from{transform:translateX(100px);opacity:0}to{transform:translateX(0);opacity:1}}
+    @keyframes slideOut{to{transform:translateX(120px);opacity:0}}
 
-/* cards spacing */
-@media (max-width: 768px) {
-  .card {
-    padding: 14px;
-  }
+    /* Payment modal */
+    #paymentModal .modal-box{max-width:500px}
+    .card-display{background:linear-gradient(135deg,#0f172a,#1e3a5f);color:#fff;padding:20px 24px;border-radius:14px;margin-bottom:16px;font-family:monospace}
+    .card-number-display{font-size:20px;letter-spacing:4px;margin:16px 0 8px}
+    .card-info-row{display:flex;justify-content:space-between;font-size:12px;opacity:0.8}
 
-  section {
-    margin-top: 20px;
-  }
-}
+    /* Review section */
+    .review-card{background:linear-gradient(180deg,#fff,#f7fff7);border-radius:12px;padding:16px;box-shadow:0 4px 16px rgba(15,23,42,0.03)}
+    .review-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+    .review-author{font-weight:700;font-size:14px}
+    .review-date{font-size:12px;color:var(--muted)}
 
-/* gallery images */
-@media (max-width: 768px) {
-  .gallery img {
-    height: 200px;
-  }
-}
+    /* Notifications widget */
+    .notif-item{display:flex;gap:12px;padding:12px;border-radius:10px;background:#f8fafc;margin-bottom:8px;align-items:flex-start}
+    .notif-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+    .notif-icon.green{background:rgba(47,158,79,0.12)}
+    .notif-icon.blue{background:rgba(43,108,176,0.12)}
+    .notif-icon.orange{background:rgba(237,137,54,0.12)}
+    .notif-unread{width:8px;height:8px;background:var(--accent);border-radius:50%;margin-top:6px;flex-shrink:0}
 
-/* timeline */
-@media (max-width: 768px) {
-  .timeline-item {
-    flex-direction: column;
-  }
-}
+    /* Tabs within sections */
+    .tab-group{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+    .tab-btn{padding:7px 14px;border-radius:8px;border:1.5px solid rgba(15,23,42,0.08);background:#fff;cursor:pointer;font-size:13px;font-weight:600;color:#555;transition:all .2s}
+    .tab-btn.active{border-color:var(--accent);background:var(--accent);color:#fff}
 
-/* buttons */
-@media (max-width: 768px) {
-  .btn {
-    width: 100%;
-    text-align: center;
-    padding: 12px 16px;
-    font-size: 15px;
-  }
+    /* Status indicator */
+    .status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:5px}
+    .status-dot.green{background:#2f9e4f}
+    .status-dot.orange{background:#ed8936}
+    .status-dot.blue{background:#2b6cb0}
+    .status-dot.red{background:#e53e3e}
 
-  .btn.ghost {
-    width: 100%;
-  }
-}
-
-/* forms */
-@media (max-width: 768px) {
-  .form-row {
-    flex-direction: column;
-  }
-
-  input,
-  select,
-  textarea {
-    font-size: 16px; /* important for iOS */
-  }
-}
-
-/* join modal */
-@media (max-width: 768px) {
-  .join-box {
-    width: 100%;
-    max-height: 92vh;
-    overflow-y: auto;
-  }
-}
-
-/* gallery modal */
-@media (max-width: 768px) {
-  .modal .frame {
-    max-height: 90vh;
-    overflow-y: auto;
-  }
-}
-
-/* footer */
-@media (max-width: 768px) {
-  footer div {
-    text-align: left !important;
-  }
-}
-
-/* ===== MOBILE HAMBURGER MENU ===== */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 44px;
-  height: 44px;
-  background: var(--card);
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  padding: 8px;
-  z-index: 1001;
-}
-.hamburger span {
-  display: block;
-  width: 22px;
-  height: 2.5px;
-  background: var(--accent);
-  border-radius: 2px;
-  transition: all 0.3s ease;
-  margin: 3px 0;
-}
-.hamburger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-.hamburger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
-}
-
-.mobile-nav-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 999;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-.mobile-nav-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.mobile-nav {
-  display: none;
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 280px;
-  max-width: 85vw;
-  height: 100vh;
-  background: var(--card);
-  z-index: 1000;
-  padding: 80px 24px 24px;
-  box-shadow: -4px 0 20px rgba(0,0,0,0.15);
-  transition: transform 0.35s cubic-bezier(.4,0,.2,1);
-  overflow-y: auto;
-  transform: translateX(100%);
-}
-.mobile-nav.active {
-  transform: translateX(0);
-}
-.mobile-nav a {
-  display: block;
-  padding: 16px 0;
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--muted);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(15,23,42,0.06);
-  transition: color 0.2s ease;
-}
-.mobile-nav a:hover {
-  color: var(--accent);
-}
-.mobile-nav a.cta {
-  display: inline-block;
-  margin-top: 16px;
-  padding: 14px 24px;
-  background: var(--accent);
-  color: #fff;
-  border-radius: 12px;
-  text-align: center;
-  width: 100%;
-  border: none;
-}
-
-@media (max-width: 768px) {
-  .hamburger {
-    display: flex;
-  }
-  .mobile-nav {
-    display: flex;
-    flex-direction: column;
-  }
-  .mobile-nav-overlay {
-    display: block;
-  }
-  nav.Menu {
-    display: none !important;
-  }
-  header {
-    padding: 12px 0;
-  }
-  .logo > div:last-child > div:last-child {
-    display: none;
-  }
-  .logo > div:last-child > div:first-child {
-    font-size: 14px;
-  }
-  .logo-badge, .logo-badge img {
-    width: 42px !important;
-    height: 42px !important;
-  }
-  
-  h1 {
-    font-size: 20px;
-  }
-  .lead {
-    font-size: 13px;
-  }
-  .pill {
-    font-size: 11px;
-    padding: 5px 8px;
-  }
-  .meta-card {
-    padding: 10px;
-    min-width: auto;
-  }
-  .meta-card strong {
-    font-size: 13px;
-  }
-  .meta-card div {
-    font-size: 12px;
-  }
-  .counter-row {
-    flex-direction: column;
-    gap: 8px;
-    padding: 12px 0;
-  }
-  .counter-row .card {
-    padding: 12px;
-  }
-  .counter-row strong {
-    font-size: 18px !important;
-  }
-  .counter-row span {
-    font-size: 11px;
-  }
-  h2 {
-    font-size: 18px;
-  }
-  h3 {
-    font-size: 16px;
-  }
-  h4 {
-    font-size: 14px;
-    margin-bottom: 8px;
-  }
-  .card {
-    padding: 14px;
-  }
-  section.card {
-    padding: 16px;
-  }
-  p {
-    font-size: 13px;
-    line-height: 1.5;
-  }
-  ul, ol {
-    padding-left: 16px;
-  }
-  li {
-    font-size: 13px;
-    margin-bottom: 6px;
-  }
-  .timeline {
-    gap: 10px;
-  }
-  .timeline-item.card {
-    padding: 12px;
-  }
-  .timeline-item strong {
-    font-size: 14px;
-  }
-  .gallery {
-    gap: 6px;
-  }
-  .gallery img {
-    height: 140px;
-  }
-  .testimonial {
-    padding: 12px;
-  }
-  .testimonial strong {
-    font-size: 14px;
-  }
-  .testimonial div {
-    font-size: 12px;
-  }
-  form {
-    gap: 10px;
-  }
-  input, select, textarea {
-    padding: 12px;
-    font-size: 16px;
-  }
-  textarea {
-    min-height: 80px;
-  }
-  details summary {
-    font-size: 14px;
-    padding: 8px 0;
-  }
-  details div {
-    font-size: 13px;
-  }
-  footer > div {
-    flex-direction: column;
-    text-align: center !important;
-  }
-  footer strong {
-    font-size: 14px;
-  }
-  aside.hero-card {
-    padding: 14px;
-  }
-  aside.hero-card h3 {
-    font-size: 15px;
-  }
-  aside.hero-card ul li {
-    font-size: 12px;
-    margin-bottom: 6px;
-  }
-  .features {
-    flex-direction: column;
-    gap: 8px;
-  }
-  .feature {
-    padding: 10px;
-    min-height: auto;
-  }
-  .cta-strip {
-    flex-direction: column;
-    gap: 12px;
-    text-align: center;
-    padding: 14px;
-  }
-  .join-box {
-    padding: 16px;
-    margin: 12px;
-    max-height: 85vh;
-  }
-  .join-box h3 {
-    font-size: 18px;
-    padding-right: 30px;
-  }
-  .modal .frame {
-    margin: 12px;
-    padding: 10px;
-  }
-  #modalCaption {
-    font-size: 12px;
-    margin-top: 8px;
-  }
-}
-
-@media (max-width: 400px) {
-  .container {
-    padding: 12px;
-  }
-  h1 {
-    font-size: 18px;
-  }
-  .lead {
-    font-size: 12px;
-  }
-  .btn {
-    padding: 12px 14px;
-    font-size: 14px;
-  }
-  .counter-row strong {
-    font-size: 16px !important;
-  }
-  .gallery img {
-    height: 120px;
-  }
-}
+    /* Responsive */
+    @media(max-width:1000px){.hero{grid-template-columns:1fr}.grid-3{grid-template-columns:repeat(2,1fr)}.testimonials{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(2,1fr)}.cabinet-layout,.admin-layout{flex-direction:column}.cabinet-sidebar,.admin-sidebar{width:100%}.cabinet-nav,.admin-nav{display:flex;flex-direction:row;flex-wrap:wrap;gap:4px}.cabinet-nav-item,.admin-nav-item{padding:7px 10px;font-size:12px}}
+    @media(max-width:768px){h1{font-size:24px}.hero{padding:12px 0}.grid-3,.testimonials,.gallery{grid-template-columns:1fr!important}.card{padding:14px}section{margin-top:20px}.gallery img{height:200px}.form-row{flex-direction:column}input,select,textarea{font-size:16px}.btn{width:100%;text-align:center;padding:12px 16px;font-size:15px}.join-box{width:100%;max-height:92vh;overflow-y:auto}.grid-2{grid-template-columns:1fr}}
+    @media(max-width:560px){.logo-badge{width:44px;height:44px}.container{padding:16px}}
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <header>
-      <div class="logo" aria-hidden="false">
-        <div class="logo-badge micro-pop" aria-hidden="true" style="background:none;box-shadow:none;">
-          <img src="ава.png" alt="Логотип Зелёный Бурабай" style="width:56px;height:56px;border-radius:12px;object-fit:contain;">
-        </div>
-        <div>
-          <div style="font-weight:800">Эко-курорт «Зелёный Бурабай»</div>
-          <div style="font-size:14px;color:var(--muted)">волонтёрские туры — Щучинск • Бурабай • охрана природы</div>
-        </div>
+<div class="container">
+  <header>
+    <div class="logo">
+      <div class="logo-badge" style="background:none;box-shadow:none;width:56px;height:56px">
+        <img src="ава.png" alt="Логотип" style="width:56px;height:56px;border-radius:12px;object-fit:contain;">
       </div>
-<nav class="Menu" aria-label="Главная навигация">
-        <a href="#about">О проекте</a>
-        <a href="#program">Программа</a>
-        <a href="#gallery">Галерея</a>
-        <a href="#team">Команда</a>
-        <a href="#join" class="cta">Записаться</a>
-      </nav>
-      <button class="hamburger" id="hamburger" aria-label="Открыть меню">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </header>
-    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
-    <nav class="mobile-nav" id="mobileNav">
+      <div>
+        <div style="font-weight:800">Эко-курорт «Зелёный Бурабай»</div>
+        <div style="font-size:13px;color:#0f172a">волонтёрские туры — Щучинск • Бурабай • охрана природы</div>
+      </div>
+    </div>
+    <nav aria-label="Главная навигация">
       <a href="#about">О проекте</a>
       <a href="#program">Программа</a>
       <a href="#gallery">Галерея</a>
+      <a href="#reviews">Отзывы</a>
       <a href="#team">Команда</a>
       <a href="#join" class="cta">Записаться</a>
+      <!-- Auth buttons injected by JS -->
+      <span id="headerAuthZone"></span>
     </nav>
+  </header>
 
-    <main>
-      <!-- HERO -->
-      <section id="about" class="card" aria-label="Главный блок">
-        <div id="hero" class="hero-card" role="region" aria-labelledby="hero-title">
+  <main>
+    <!-- HERO -->
+    <section id="about" class="card">
+      <div class="hero">
+        <div id="hero" class="hero-card">
           <div class="pill">Волонтёрский эко-тур</div>
-          <h1 id="hero-title">Посади дерево. Сохрани память. Отдохни душой в Бурабае</h1>
+          <h1>Посади дерево. Сохрани память. Отдохни душой в Бурабае</h1>
           <p class="lead">Интерактивные волонтёрские программы в Щучинске и национальном парке Бурабай. Работа в природе, экскурсии, комфортное размещение и новые друзья.</p>
-
-          <div class="hero-meta" aria-hidden="true">
-            <div class="meta-card">
-              <strong>Длительность</strong>
-              <div style="color:var(--muted)">5 • 7 • 14 дней</div>
-            </div>
-            <div class="meta-card">
-              <strong>Формат</strong>
-              <div style="color:var(--muted)">Практика, лекции, экскурсии</div>
-            </div>
-            <div class="meta-card">
-              <strong>Подходит</strong>
-              <div style="color:var(--muted)">от 16 лет, семьи, студенты</div>
-            </div>
+          <div class="hero-meta">
+            <div class="meta-card"><strong>Длительность</strong><div style="color:var(--muted)">5 • 7 • 14 дней</div></div>
+            <div class="meta-card"><strong>Формат</strong><div style="color:var(--muted)">Практика, лекции, экскурсии</div></div>
+            <div class="meta-card"><strong>Подходит</strong><div style="color:var(--muted)">от 16 лет, семьи, студенты</div></div>
           </div>
-
           <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap">
-            <!-- только эта кнопка открывает модалку -->
-            <a href="#" class="btn micro-pop open-hero-join">Записаться</a>
-            <a href="#program" class="btn ghost micro-pop">Узнать программу</a>
+            <a href="#" class="btn open-hero-join">Записаться</a>
+            <a href="#program" class="btn ghost">Узнать программу</a>
           </div>
-
-          <div class="counter-row" aria-hidden="false">
-            <div class="card" style="flex:1;text-align:center">
-              <strong id="c1" style="display:block;font-size:22px">0</strong>
-              <span style="color:var(--muted)">посажено деревьев</span>
-            </div>
-            <div class="card" style="flex:1;text-align:center">
-              <strong id="c2" style="display:block;font-size:22px">0</strong>
-              <span style="color:var(--muted)">волонтёров</span>
-            </div>
-            <div class="card" style="flex:1;text-align:center">
-              <strong id="c3" style="display:block;font-size:22px">0</strong>
-              <span style="color:var(--muted)">проведено акций</span>
-            </div>
+          <div class="counter-row">
+            <div class="card" style="flex:1;text-align:center"><strong id="c1" style="display:block;font-size:22px">0</strong><span style="color:var(--muted)">посажено деревьев</span></div>
+            <div class="card" style="flex:1;text-align:center"><strong id="c2" style="display:block;font-size:22px">0</strong><span style="color:var(--muted)">волонтёров</span></div>
+            <div class="card" style="flex:1;text-align:center"><strong id="c3" style="display:block;font-size:22px">0</strong><span style="color:var(--muted)">проведено акций</span></div>
           </div>
-
         </div>
 
-        <aside class="hero-card" aria-label="Быстрая информация">
+        <aside class="hero-card">
           <h3 style="margin-top:0">Ближайшие заезды</h3>
-          <ul style="padding-left:0;list-style:none;margin:0;color:var(--muted)">
-            <li style="margin-bottom:8px"><strong>12–18 июня</strong> — 7 дней (Глубокая программа)</li>
-            <li style="margin-bottom:8px"><strong>4–8 августа</strong> — 5 дней (Эко-выходные)</li>
-            <li style="margin-bottom:8px"><strong>1–14 сентября</strong> — 14 дней (Волонтёрский курс)</li>
+          <ul style="padding-left:0;list-style:none;margin:0;color:#0f172a">
+            <li style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed rgba(15,23,42,0.06)">
+              <strong>12–18 июня</strong> — 7 дней<br><span style="font-size:12px;color:#0f172a">Глубокая программа</span>
+              <div style="margin-top:6px"><button class="btn sm" onclick="openBookingModal('Июнь 12–18, 7 дней','140000')">Забронировать</button></div>
+            </li>
+            <li style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed rgba(15,23,42,0.06)">
+              <strong>4–8 августа</strong> — 5 дней<br><span style="font-size:12px;color:#0f172a">Эко-выходные</span>
+              <div style="margin-top:6px"><button class="btn sm" onclick="openBookingModal('Август 4–8, 5 дней','100000')">Забронировать</button></div>
+            </li>
+            <li>
+              <strong>1–14 сентября</strong> — 14 дней<br><span style="font-size:12px;color:#0f172a">Волонтёрский курс</span>
+              <div style="margin-top:6px"><button class="btn sm" onclick="openBookingModal('Сентябрь 1–14, 14 дней','280000')">Забронировать</button></div>
+            </li>
           </ul>
-
-          <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
-            <div style="font-weight:700">Цена от <span style="color:var(--accent);">100 000 ₸</span></div>
-            <a class="btn ghost micro-pop" id="open-info" href="#program">Смотреть подробнее</a>
+          <div style="margin-top:16px;background:rgba(47,158,79,0.06);padding:12px;border-radius:10px">
+            <div style="font-weight:700;font-size:15px">Цена от <span style="color:var(--accent)">100 000 ₸</span></div>
+            <div style="font-size:12px;color:var(--muted);margin-top:4px">Включает проживание, питание и программу</div>
           </div>
         </aside>
-      </section>
+      </div>
+    </section>
 
-      <!-- ABOUT -->
-      <section id="about" class="card" aria-labelledby="about-title">
-        <h2 id="about-title">О проекте</h2>
-        <p>«Зелёный Бурабай» — совместная инициатива местных НКО, добровольцев и природоохранных служб. Наша цель — поддержка природных и культурных объектов через практическую помощь, образовательные программы и вовлечение сообщества.</p>
-        <p>Мы проводим короткие и длительные волонтёрские смены в районе Щучинска и Бурабая (Казахстан): посадки, укрепление берегов, ремонт экологических троп, уход за малыми архитектурными формами и помощь местным музеям.</p>
+    <!-- ABOUT -->
+    <section id="about2" class="card">
+      <h2>О проекте</h2>
+      <p>«Зелёный Бурабай» — совместная инициатива местных НКО, добровольцев и природоохранных служб. Наша цель — поддержка природных и культурных объектов через практическую помощь, образовательные программы и вовлечение сообщества.</p>
+      <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+        <div class="card" style="flex:1;min-width:200px"><h4>Наш подход</h4><ul style="color:var(--muted);font-size:13px"><li>Долгосрочные проекты с повторными посещениями.</li><li>Обучение: мастер-классы от экологов и историков.</li><li>Экологичные материалы и согласование с местными службами.</li></ul></div>
+        <div class="card" style="flex:1;min-width:200px"><h4>Партнёры</h4><div style="color:var(--muted);font-size:13px">Местные администрации, школьные экоклубы, исследовательские центры и туристические операторы.</div></div>
+        <div class="card" style="flex:1;min-width:200px"><h4>Цели</h4><div style="color:var(--muted);font-size:13px">Сохранение биоразнообразия, восстановление береговой растительности и вовлечение молодёжи в практическую экологию.</div></div>
+      </div>
+    </section>
 
-        <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
-          <div class="card" style="flex:1;min-width:220px">
-            <h4>Наш подход</h4>
-            <ul style="color:var(--muted);font-size:13px">
-              <li>Долгосрочные проекты с повторными посещениями участков.</li>
-              <li>Обучение: мастер-классы и лекции от экологов и историков.</li>
-              <li>Ответственность: экологичные материалы и согласование с местными службами.</li>
-            </ul>
-          </div>
-          <div class="card" style="flex:1;min-width:220px">
-            <h4>Партнёры</h4>
-            <div style="color:var(--muted);font-size:13px">Местные администрации, школьные экоклубы, исследовательские центры и туристические операторы.</div>
-          </div>
-          <div class="card" style="flex:1;min-width:220px">
-            <h4>Цели</h4>
-            <div style="color:var(--muted);font-size:13px">Сохранение биоразнообразия, восстановление береговой растительности и вовлечение молодёжи в практическую экологию.</div>
-          </div>
-        </div>
-      </section>
+    <!-- PROGRAM -->
+    <section id="program" class="card">
+      <h2>Программа (пример 7 дней)</h2>
+      <p style="color:var(--muted)">Программа адаптируется под сезон и цели проектов.</p>
+      <div class="timeline">
+        <div class="timeline-item card"><div style="flex:1"><strong>День 1 — Прибытие и знакомство</strong><div style="color:var(--muted)">Размещение, вводный брифинг, лёгкая прогулка.</div></div></div>
+        <div class="timeline-item card"><div style="flex:1"><strong>День 2 — Озеленение</strong><div style="color:var(--muted)">Мастер-класс по посадке, подготовка почвы.</div></div></div>
+        <div class="timeline-item card"><div style="flex:1"><strong>День 3 — История и культура</strong><div style="color:var(--muted)">Экскурсия по Щучинску, местные музеи.</div></div></div>
+        <div class="timeline-item card"><div style="flex:1"><strong>День 4 — Уход за памятниками</strong><div style="color:var(--muted)">Уборка, установка табличек, консервация.</div></div></div>
+        <div class="timeline-item card"><div style="flex:1"><strong>День 5 — Национальный парк Бурабай</strong><div style="color:var(--muted)">Лекция натуралиста, укрепление береговой растительности.</div></div></div>
+        <div class="timeline-item card"><div style="flex:1"><strong>День 6 — Мониторинг и сбор данных</strong><div style="color:var(--muted)">Фотофиксация, ведение полевых журналов.</div></div></div>
+        <div class="timeline-item card"><div style="flex:1"><strong>День 7 — Итоги и отъезд</strong><div style="color:var(--muted)">Подведение результатов, вручение сертификатов.</div></div></div>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn open-hero-join" href="#">Записаться</a>
+        <a class="btn ghost" href="#faq">Частые вопросы</a>
+      </div>
+    </section>
 
-      <!-- PROGRAM -->
-      <section id="program" class="card" aria-labelledby="program-title">
-        <h2 id="program-title">Программа (пример 7 дней)</h2>
-        <p style="color:var(--muted)">Программа адаптируется под сезон, погоду и цели проектов. Ниже — подробный пример 7-дневного пакета.</p>
+    <!-- GALLERY -->
+    <section id="gallery" class="card">
+      <h2>Галерея</h2>
+      <p style="color:var(--muted)">Фото с прошлых заездов. Нажмите, чтобы увеличить.</p>
+      <div class="gallery" style="margin-top:12px">
+        <img alt="Окжетпес — гранитная скала" src="1.jpg" data-large="1.jpg" data-caption="Окжетпес — знаменитая гранитная скала Бурабайской группы; символ региона."/>
+        <img alt="Монумент «Золотой воин»" src="2.jpg" data-large="2.jpg" data-caption="Монумент «Золотой воин» — памятный знак культурного наследия региона."/>
+        <img alt="Жумбактас — скальная формация" src="3.jpg" data-large="3.jpg" data-caption="Жумбактас — одна из знаменитых скал Бурабая."/>
+        <img alt="Лыжный трамплин в Щучинске" src="4.jpg" data-large="4.jpg" data-caption="Лыжный трамплин — спортивная площадка с панорамными видами."/>
+        <img alt="Скульптура «Мыслитель»" src="5.jpg" data-large="5.jpg" data-caption="Скульптура «Мыслитель» — местный арт-объект."/>
+        <img alt="Дорога в Бурабай" src="6.jpg" data-large="6.jpg" data-caption="Живописный подъезд к национальному парку."/>
+      </div>
+    </section>
 
-        <div class="timeline" style="margin-top:12px">
-          <div class="timeline-item card">
-            <div style="display:flex;flex:1;justify-content:space-between;align-items:center">
-              <div>
-                <strong>День 1 — Прибытие и знакомство</strong>
-                <div style="color:var(--muted)">Размещение, вводный брифинг по безопасности, лёгкая прогулка по набережной Щучинска.</div>
-              </div>
-              <div class="circle" aria-hidden="true"></div>
-            </div>
-          </div>
+    <!-- REVIEWS SECTION -->
+    <section id="reviews" class="card">
+      <h2>Отзывы</h2>
+      <p style="color:var(--muted)">Авторизованные пользователи могут оставить отзыв от своего имени.</p>
+      <div id="reviewsList" style="margin-top:16px;display:flex;flex-direction:column;gap:12px"></div>
 
-          <div class="timeline-item card">
-            <div style="display:flex;flex:1;justify-content:space-between;align-items:center">
-              <div>
-                <strong>День 2 — Озеленение</strong>
-                <div style="color:var(--muted)">Мастер-класс по посадке, подготовка почвы, посадка местных видов деревьев и кустарников.</div>
-              </div>
-              <div class="circle" aria-hidden="true"></div>
-            </div>
-          </div>
-
-          <div class="timeline-item card">
-            <div style="display:flex;flex:1;justify-content:space-between;align-items:center">
-              <div>
-                <strong>День 3 — История и культура</strong>
-                <div style="color:var(--muted)">Экскурсия по Щучинску, местные музеи, встречи с жителями и рассказы о регионе.</div>
-              </div>
-              <div class="circle" aria-hidden="true"></div>
-            </div>
-          </div>
-
-          <div class="timeline-item card">
-            <div style="display:flex;flex:1;justify-content:space-between;align-items:center">
-              <div>
-                <strong>День 4 — Уход за памятниками</strong>
-                <div style="color:var(--muted)">Уборка, установка табличек, мягкая консервация и информационные акции.</div>
-              </div>
-              <div class="circle" aria-hidden="true"></div>
-            </div>
-          </div>
-
-          <div class="timeline-item card">
-            <div style="display:flex;flex:1;justify-content:space-between;align-items:center">
-              <div>
-                <strong>День 5 — Национальный парк Бурабай</strong>
-                <div style="color:var(--muted)">Лекция натуралиста, наблюдение птиц, работа по укреплению береговой растительности и благоустройство троп.</div>
-              </div>
-              <div class="circle" aria-hidden="true"></div>
-            </div>
-          </div>
-
-          <div class="timeline-item card">
-            <div style="display:flex;flex:1;justify-content:space-between;align-items:center">
-              <div>
-                <strong>День 6 — Мониторинг и сбор данных</strong>
-                <div style="color:var(--muted)">Фотофиксация, ведение полевых журналов, обучение простому мониторингу экосистем.</div>
-              </div>
-              <div class="circle" aria-hidden="true"></div>
-            </div>
-          </div>
-
-          <div class="timeline-item card">
-            <div style="display:flex;flex:1;justify-content:space-between;align-items:center">
-              <div>
-                <strong>День 7 — Итоги и отъезд</strong>
-                <div style="color:var(--muted)">Подведение результатов, вручение сертификатов и обсуждение дальнейших шагов.</div>
-              </div>
-              <div class="circle" aria-hidden="true"></div>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap">
-          <a class="btn open-hero-join" href="#">Записаться на 7-дневный тур</a>
-          <a class="btn ghost" href="#faq">Частые вопросы</a>
-        </div>
-      </section>
-
-      <!-- ITINERARY -->
-      <section id="itinerary" class="card" aria-labelledby="itinerary-title">
-        <h2 id="itinerary-title">Маршрут: Щучинск — Бурабай</h2>
-        <p style="color:var(--muted)">Краткая информация о ключевых точках и достопримечательностях, которые вы посетите и за которыми сможете ухаживать.</p>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
+      <div id="addReviewBlock" style="margin-top:20px;display:none">
+        <h3 style="margin:0 0 12px;font-size:16px">Написать отзыв</h3>
+        <div style="display:grid;gap:10px">
           <div>
-            <h3>Щучинск</h3>
-            <ul style="list-style:none;padding:0;margin:0">
-              <li style="padding:10px 0;border-bottom:1px dashed rgba(15,23,42,0.05)"><strong>Исторический центр:</strong> прогулки, уборка, восстановление информационных панелей.</li>
-              <li style="padding:10px 0;border-bottom:1px dashed rgba(15,23,42,0.05)"><strong>Местные музеи:</strong> совместные проекты по архивированию и экспозициям.</li>
-              <li style="padding:10px 0"><strong>Природные участки у города:</strong> посадка древесных и кустарниковых пород.</li>
-            </ul>
+            <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px">Оценка:</label>
+            <div id="starRating" style="display:flex;gap:4px;font-size:28px;cursor:pointer">
+              <span data-val="1">☆</span><span data-val="2">☆</span><span data-val="3">☆</span><span data-val="4">☆</span><span data-val="5">☆</span>
+            </div>
           </div>
           <div>
-            <h3>Бурабай</h3>
-            <ul style="list-style:none;padding:0;margin:0">
-              <li style="padding:10px 0;border-bottom:1px dashed rgba(15,23,42,0.05)"><strong>Берега озёр:</strong> восстановление растительности и борьба с эрозией.</li>
-              <li style="padding:10px 0;border-bottom:1px dashed rgba(15,23,42,0.05)"><strong>Пешеходные тропы:</strong> ремонт настилов, установка указателей, уборка.</li>
-              <li style="padding:10px 0"><strong>Образовательные зоны:</strong> площадки для лекций и мастер-классов.</li>
-            </ul>
+            <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px">Дата поездки:</label>
+            <input type="month" id="reviewTripDate" style="max-width:200px"/>
           </div>
-        </div>
-
-        <div style="margin-top:12px">
-          <h4>Благоустройство и устойчивость</h4>
-          <p style="color:var(--muted)">Мы используем экологичные материалы для табличек и настилов, сотрудничаем с дендрологами при выборе пород. Проекты согласуются с администрацией парка и местными сообществами.</p>
-        </div>
-      </section>
-
-      <!-- TEAM -->
-      <section id="team" class="card" aria-labelledby="team-title">
-        <h2 id="team-title">Наша команда</h2>
-        <div class="grid-3">
-          <div class="card">
-            <h3>Айжан Нурланова</h3>
-            <p>Координатор программы, эколог с 10-летним опытом. Руководит проектами по восстановлению лесов и взаимодействует с партнёрами.</p>
-          </div>
-          <div class="card">
-            <h3>Александр Михайлов</h3>
-            <p>Гид и историк — проводит экскурсии по Щучинску и Бурабаю, рассказывает о культуре и легендах региона.</p>
-          </div>
-          <div class="card">
-            <h3>Мария Иванова</h3>
-            <p>Инструктор по безопасности и волонтёрскому этикету. Обучает практическим навыкам и следит за комфортом группы.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- GALLERY -->
-      <section id="gallery" class="card" aria-labelledby="gallery-title">
-        <h2 id="gallery-title">Галерея</h2>
-        <p style="color:var(--muted)">Фото с прошлых заездов и природные виды региона. Нажмите на изображение, чтобы увеличить — под фото откроется подробная подпись.</p>
-
-        <div class="gallery" style="margin-top:12px">
-          <!-- Each image has a data-large (for modal image) and data-caption (detailed description shown in modal) -->
-          <img alt="Окжетпес — гранитная скала в сердце Бурабая" src="1.jpg" data-large="1.jpg"
-               data-caption="Окжетпес — знаменитая гранитная скала Бурабайской группы; символ региона, место легенд и красивых видов."/>
-          <img alt="Монумент 'Золотой воин' — мемориал в окрестностях" src="2.jpg" data-large="2.jpg"
-               data-caption="Монумент «Золотой воин» — памятный знак, посвящённый истории и культурному наследию региона."/>
-          <img alt="Жумбактас — причудливая скальная формация" src="3.jpg" data-large="3.jpg"
-               data-caption="Жумбактас (касаясь — слышны легенды) — одна из знаменитых скал Бурабая, привлекающая туристов и фотографов."/>
-          <img alt="Лыжный трамплин в Щучинске — вид на спортивную зону" src="4.jpg" data-large="4.jpg"
-               data-caption="Лыжный трамплин в Щучинске — спортивная площадка и локальная достопримечательность с панорамными видами."/>
-          <img alt="Скульптура 'Мыслитель' — арт-объект в Щучинске" src="5.jpg" data-large="5.jpg"
-               data-caption="Скульптура «Мыслитель» — местный арт-объект, часто используемый как точка встречи и фотофон."/>
-          <img alt="Дорога в Бурабай — живописный подъезд к национальному парку" src="6.jpg" data-large="6.jpg"
-               data-caption="Дорога в Бурабай — живописный подъезд, открывающий виды на озёра и леса национального парка."/>
-        </div>
-      </section>
-
-      <!-- STORIES / TESTIMONIALS -->
-      <section id="stories" class="card" aria-labelledby="stories-title">
-        <h2 id="stories-title">Истории волонтёров</h2>
-        <div class="testimonials" style="margin-top:12px">
-          <div class="testimonial">
-            <strong>Алия, 24 года</strong>
-            <div style="color:var(--muted);margin-top:8px">"Это был лучший опыт — посадили 50 саженцев, услышали удивительные истории местных жителей и в конце получили сертификат. Атмосфера как в большой семье."</div>
-          </div>
-          <div class="testimonial">
-            <strong>Ербол, 32 года</strong>
-            <div style="color:var(--muted);margin-top:8px">"Привёл студентов — ребята получили практические навыки, а парк стал немного чище. Спасибо организаторам за четкую логистику."</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- JOIN / SIGNUP (оставляем эту форму на странице — она останется и будет синхронизирована с модалкой) -->
-      <section id="join" class="card" aria-labelledby="join-title">
-        <h2 id="join-title">Присоединиться к туру</h2>
-        <p style="color:var(--muted)">Заполните форму — мы свяжемся и поможем подобрать пакет. Возможна частичная оплата и групповое бронирование.</p>
-
-        <!-- нижняя форма, оставляем как основную -->
-        <form id="signup" style="margin-top:12px;display:grid;gap:10px" onsubmit="return handleSubmit(event)" aria-label="Форма записи">
-          <div class="form-row">
-            <input type="text" id="name" name="name" placeholder="ФИО*" required />
-            <input type="email" id="email" name="email" placeholder="E-mail*" required />
-          </div>
-          <div class="form-row">
-            <input type="text" id="phone" name="phone" placeholder="Телефон (WhatsApp)"/>
-            <select id="package" name="package" aria-label="Выберите пакет">
-              <option value="5">5 дней — Эко-выходные</option>
-              <option value="7" selected>7 дней — Глубокая программа</option>
-              <option value="14">14 дней — Волонтёрский курс</option>
-            </select>
-          </div>
-          <textarea id="notes" name="notes" rows="4" placeholder="Коротко о себе, пожелания и даты"></textarea>
-          <div style="display:flex;gap:8px;align-items:center">
-            <label style="font-size:13px"><input type="checkbox" id="agree" name="agree" required/> Я согласен(на) с правилами участия</label>
-            <div style="margin-left:auto"><button class="btn" type="submit">Отправить заявку</button></div>
-          </div>
-          <div id="msg" role="status" aria-live="polite" style="color:var(--accent);font-weight:700"></div>
-        </form>
-
-        <div style="margin-top:12px;color:var(--muted);font-size:13px">Контактная почта: <a href="mailto:info@zelenyburabay.kz">info@zelenyburabay.kz</a> • Телефон: +7 (701) 000-0000</div>
-      </section>
-
-      <!-- FAQ -->
-      <section id="faq" class="card" aria-labelledby="faq-title">
-        <h2 id="faq-title">Частые вопросы</h2>
-        <details style="margin-top:8px"><summary><strong>Нужен ли опыт?</strong></summary><div style="color:var(--muted);margin-top:8px">Нет — все инструктируют на месте. Важно иметь желание помогать и базовую физическую подготовку.</div></details>
-        <details style="margin-top:8px"><summary><strong>Какое питание?</strong></summary><div style="color:var(--muted);margin-top:8px">Трёхразовое питание с учётом вегетарианских запросов. Можно согласовать особые диеты заранее.</div></details>
-        <details style="margin-top:8px"><summary><strong>Есть ли возрастные ограничения?</strong></summary><div style="color:var(--muted);margin-top:8px">Минимально 16 лет при сопровождении взрослого. Для групп старше 60 лет возможны облегчённые программы.</div></details>
-        <details style="margin-top:8px"><summary><strong>Страховка?</strong></summary><div style="color:var(--muted);margin-top:8px">Базовая страховая защита включена. Для расширенной страховки посоветуем надёжного провайдера.</div></details>
-      </section>
-
-      <!-- PARTNERS -->
-      <section id="partners" class="card" aria-labelledby="partners-title">
-        <h2 id="partners-title">Партнёры и поддержка</h2>
-        <p style="color:var(--muted);margin-top:6px">Мы работаем с НКО, научными центрами и местными властями. Хотите сотрудничать? Пишите — обсудим проекты и гранты.</p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
-          <div style="padding:12px;border-radius:8px;background:#fff;min-width:160px;text-align:center">НКО «Чистый берег»</div>
-          <div style="padding:12px;border-radius:8px;background:#fff;min-width:160px;text-align:center">Школьные экоклубы Щучинска</div>
-          <div style="padding:12px;border-radius:8px;background:#fff;min-width:160px;text-align:center">Нацпарк Бурабай</div>
-        </div>
-      </section>
-
-    </main>
-
-    <footer>
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
-        <div>
-          <strong>Эко-курорт «Зелёный Бурабай»</strong>
-          <div style="color:var(--muted);font-size:13px">Щучинск и национальный парк Бурабай, Казахстан — партнеры: локальные НКО и администрации.</div>
-        </div>
-        <div style="text-align:right">
-          <div style="font-size:13px">Контакт: <a href="mailto:info@zelenyburabay.kz">info@zelenyburabay.kz</a> • +7 (701) 305-7007</div>
-          <div style="margin-top:8px;color:var(--muted);font-size:12px">© 2026 — Все права защищены</div>
-          <div style="margin-top:6px;color:var(--muted);font-size:12px">Следите за нами: <a href="#" style="color:var(--accent)">Instagram</a> • <a href="#" style="color:var(--accent)">Telegram</a></div>
+          <textarea id="reviewText" rows="4" placeholder="Поделитесь впечатлениями о туре..."></textarea>
+          <button class="btn" style="justify-self:start" onclick="submitReview()">Опубликовать отзыв</button>
         </div>
       </div>
-    </footer>
-  </div>
+      <div id="reviewLoginPrompt" style="margin-top:16px;background:rgba(47,158,79,0.06);padding:16px;border-radius:10px;display:none">
+        <p style="margin:0;font-size:14px">Чтобы оставить отзыв, <a href="#" onclick="openAuthModal('login');return false" style="color:var(--accent);font-weight:700">войдите в аккаунт</a> или <a href="#" onclick="openAuthModal('register');return false" style="color:var(--accent-2);font-weight:700">зарегистрируйтесь</a>.</p>
+      </div>
+    </section>
 
-  <!-- Modal for gallery images (with caption) -->
-  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Изображение">
-    <div class="frame card" style="padding:12px;max-width:1100px;position:relative">
-      <button id="closeModal" style="position:absolute;right:12px;top:8px;background:transparent;border:none;font-size:28px;line-height:1;color:#222;cursor:pointer">×</button>
-      <img id="modalImg" src="" alt="" style="width:100%;height:auto;border-radius:8px;display:block;margin-top:6px"/>
-      <div id="modalCaption" aria-live="polite"></div>
-    </div>
-  </div>
+    <!-- TEAM -->
+    <section id="team" class="card">
+      <h2>Наша команда</h2>
+      <div class="grid-3">
+        <div class="card"><h3>Айжан Нурланова</h3><p>Координатор программы, эколог с 10-летним опытом.</p></div>
+        <div class="card"><h3>Валерий Михайлович</h3><p>Гид и историк — проводит экскурсии по Щучинску и Бурабаю.</p></div>
+        <div class="card"><h3>Мария Иванова</h3><p>Инструктор по безопасности и волонтёрскому этикету.</p></div>
+      </div>
+    </section>
 
-  <!-- NEW: Join modal (popup) — появляется только при клике в hero -->
-  <div id="joinModal" class="join-modal hidden" role="dialog" aria-modal="true" aria-labelledby="joinModalTitle">
-    <div class="join-box" role="document">
-      <button class="join-close" id="closeJoinModal" aria-label="Закрыть">×</button>
-      <h3 id="joinModalTitle">Записаться на тур</h3>
-      <p class="muted">Заполните форму — мы свяжемся и подтвердим вашу заявку.</p>
-      <!-- модалка предоставляет ту же форму, но при отправке переносит данные в основную форму и вызывает её обработчик -->
-      <form id="signupModal" style="margin-top:8px;display:grid;gap:8px" aria-label="Модальная форма записи">
-        <input type="text" name="m_name" id="m_name" placeholder="ФИО*" required />
-        <input type="email" name="m_email" id="m_email" placeholder="E-mail*" required />
-        <input type="text" name="m_phone" id="m_phone" placeholder="Телефон (WhatsApp)"/>
-        <select id="m_package" name="m_package" aria-label="Пакет">
-          <option value="5">5 дней — Эко-выходные</option>
-          <option value="7" selected>7 дней — Глубокая программа</option>
-          <option value="14">14 дней — Волонтёрский курс</option>
-        </select>
-        <textarea id="m_notes" name="m_notes" rows="3" placeholder="Коротко о себе, пожелания и даты"></textarea>
-        <div style="display:flex;align-items:center;gap:8px">
-          <label style="font-size:13px"><input type="checkbox" id="m_agree" required/> Я согласен(на) с правилами участия</label>
-          <div style="margin-left:auto"><button class="btn" type="submit" style="min-width:120px">Отправить</button></div>
+    <!-- JOIN -->
+    <section id="join" class="card">
+      <h2>Присоединиться к туру</h2>
+      <p style="color:var(--muted)">Заполните форму — мы свяжемся и поможем подобрать пакет.</p>
+      <form id="signup" style="margin-top:12px" onsubmit="return handleSubmit(event)">
+        <div class="form-row">
+          <input type="text" id="name" name="name" placeholder="ФИО*" required />
+          <input type="email" id="email" name="email" placeholder="E-mail*" required />
         </div>
+        <div class="form-row">
+          <input type="text" id="phone" name="phone" placeholder="Телефон (WhatsApp)"/>
+          <select id="package" name="package">
+            <option value="5">5 дней — Эко-выходные</option>
+            <option value="7" selected>7 дней — Глубокая программа</option>
+            <option value="14">14 дней — Волонтёрский курс</option>
+          </select>
+        </div>
+        <textarea id="notes" name="notes" rows="3" placeholder="Коротко о себе, пожелания и даты"></textarea>
+        <div style="display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap">
+          <label style="font-size:13px;display:flex;align-items:flex-start;gap:6px;cursor:pointer"><input type="checkbox" id="agree" required style="margin-top:2px;flex-shrink:0;width:auto"/> Я согласен(на) с правилами участия</label>
+          <div style="margin-left:auto"><button class="btn" type="submit">Отправить заявку</button></div>
+        </div>
+        <div id="msg" role="status" aria-live="polite" style="color:var(--accent);font-weight:700"></div>
       </form>
+      <div style="margin-top:12px;color:var(--muted);font-size:13px">Контакт: <a href="mailto:info@zelenyburabay.kz">info@zelenyburabay.kz</a> • +7 (701) 000-0000</div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="card">
+      <h2>Частые вопросы</h2>
+      <details style="margin-top:8px"><summary><strong>Нужен ли опыт?</strong></summary><div style="color:var(--muted);margin-top:8px;padding:8px 0">Нет — все инструктируют на месте.</div></details>
+      <details style="margin-top:8px"><summary><strong>Какое питание?</strong></summary><div style="color:var(--muted);margin-top:8px;padding:8px 0">Трёхразовое питание с учётом вегетарианских запросов.</div></details>
+      <details style="margin-top:8px"><summary><strong>Есть ли возрастные ограничения?</strong></summary><div style="color:var(--muted);margin-top:8px;padding:8px 0">Минимально 16 лет при сопровождении взрослого.</div></details>
+      <details style="margin-top:8px"><summary><strong>Страховка?</strong></summary><div style="color:var(--muted);margin-top:8px;padding:8px 0">Базовая страховая защита включена.</div></details>
+      <details style="margin-top:8px"><summary><strong>Как оплатить тур?</strong></summary><div style="color:var(--muted);margin-top:8px;padding:8px 0">Онлайн-оплата банковской картой доступна в личном кабинете после бронирования. После оплаты вы получите электронный чек на email и WhatsApp.</div></details>
+    </section>
+
+    <!-- PARTNERS -->
+    <section id="partners" class="card">
+      <h2>Партнёры</h2>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+        <div style="padding:12px;border-radius:8px;background:#fff;min-width:160px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.04)">НКО «Чистый берег»</div>
+        <div style="padding:12px;border-radius:8px;background:#fff;min-width:160px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.04)">Школьные экоклубы Щучинска</div>
+        <div style="padding:12px;border-radius:8px;background:#fff;min-width:160px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.04)">Нацпарк Бурабай</div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="margin-top:36px;padding:24px 0;border-top:1px solid rgba(15,23,42,0.06)">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+      <div>
+        <strong>Эко-курорт «Зелёный Бурабай»</strong>
+        <div style="color:var(--muted);font-size:13px">Щучинск и национальный парк Бурабай, Казахстан</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:13px">Контакт: <a href="mailto:info@zelenyburabay.kz">info@zelenyburabay.kz</a> • +7 (701) 000-0000</div>
+        <div style="margin-top:8px;color:var(--muted);font-size:12px">© 2025 — Все права защищены</div>
+        <div style="margin-top:6px;font-size:12px"><a href="#" style="color:var(--accent)">Instagram</a> • <a href="#" style="color:var(--accent)">Telegram</a></div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ============================================================
+     GALLERY MODAL
+============================================================ -->
+<div id="modal" class="modal hidden" role="dialog">
+  <div class="frame card" style="padding:12px;max-width:900px;position:relative">
+    <button id="closeModal" style="position:absolute;right:12px;top:8px;background:rgba(0,0,0,0.45);border:none;font-size:36px;cursor:pointer;color:#fff;font-weight:900;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;line-height:1">×</button>
+    <img id="modalImg" src="" alt="" style="width:100%;height:auto;border-radius:8px;display:block;margin-top:6px"/>
+    <div id="modalCaption"></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     JOIN MODAL
+============================================================ -->
+<div id="joinModal" class="join-modal hidden" role="dialog">
+  <div class="join-box">
+    <button class="join-close" id="closeJoinModal">×</button>
+    <h3>Записаться на тур</h3>
+    <p class="muted">Мы свяжемся и подтвердим вашу заявку.</p>
+    <form id="signupModal" style="display:grid;gap:8px">
+      <input type="text" id="m_name" placeholder="ФИО*" required />
+      <input type="email" id="m_email" placeholder="E-mail*" required />
+      <input type="text" id="m_phone" placeholder="Телефон (WhatsApp)"/>
+      <select id="m_package">
+        <option value="5">5 дней — Эко-выходные</option>
+        <option value="7" selected>7 дней — Глубокая программа</option>
+        <option value="14">14 дней — Волонтёрский курс</option>
+      </select>
+      <textarea id="m_notes" rows="3" placeholder="Коротко о себе, пожелания и даты"></textarea>
+      <div style="display:flex;align-items:flex-start;gap:8px">
+        <label style="font-size:13px;display:flex;align-items:flex-start;gap:6px;cursor:pointer"><input type="checkbox" id="m_agree" required style="margin-top:2px;flex-shrink:0;width:auto"/> Согласен(на) с правилами</label>
+        <div style="margin-left:auto"><button class="btn" type="submit">Отправить</button></div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============================================================
+     AUTH MODAL
+============================================================ -->
+<div id="authModal" class="overlay hidden">
+  <div class="modal-box" style="max-width:440px">
+    <button class="modal-close" onclick="closeModal('authModal')">×</button>
+    <h2 style="margin-top:0;font-size:22px">Вход / Регистрация</h2>
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchAuthTab('login')">Войти</button>
+      <button class="auth-tab" onclick="switchAuthTab('register')">Регистрация</button>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="loginForm" class="auth-form active">
+      <input type="email" id="loginEmail" placeholder="E-mail*" required />
+      <input type="password" id="loginPassword" placeholder="Пароль*" required />
+      <div id="loginError" style="color:#e53e3e;font-size:13px;display:none"></div>
+      <button class="btn" onclick="doLogin()">Войти</button>
+      <div style="text-align:center;font-size:13px;color:var(--muted)">
+        Нет аккаунта? <a href="#" onclick="switchAuthTab('register');return false" style="color:var(--accent);font-weight:600">Зарегистрироваться</a>
+      </div>
+      <div style="background:#f8fafc;padding:12px;border-radius:8px;font-size:12px;color:var(--muted)">
+        <strong>Демо-вход:</strong><br>
+        Пользователь: user@test.kz / user123<br>
+        Администратор: admin@zelenyburabay.kz / admin123
+      </div>
+    </div>
+
+    <!-- REGISTER -->
+    <div id="registerForm" class="auth-form">
+      <div class="form-row">
+        <input type="text" id="regName" placeholder="Имя*" required />
+        <input type="text" id="regSurname" placeholder="Фамилия*" required />
+      </div>
+      <input type="email" id="regEmail" placeholder="E-mail*" required />
+      <input type="tel" id="regPhone" placeholder="Телефон (WhatsApp)*" required />
+      <input type="password" id="regPassword" placeholder="Пароль (мин. 6 символов)*" required />
+      <input type="password" id="regPassword2" placeholder="Повторите пароль*" required />
+      <div id="regError" style="color:#e53e3e;font-size:13px;display:none"></div>
+      <button class="btn" onclick="doRegister()">Создать аккаунт</button>
     </div>
   </div>
+</div>
 
-  <script>
-    // --- Scroll reveal for sections ---
-    (function(){
-      const sections = document.querySelectorAll('section');
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
-      }, { threshold: 0.18 });
-      sections.forEach(s => observer.observe(s));
-    })();
+<!-- ============================================================
+     USER CABINET
+============================================================ -->
+<div id="cabinetPanel" class="overlay hidden">
+  <div class="modal-box" style="max-width:900px;padding:0">
+    <button class="modal-close" onclick="closeModal('cabinetPanel')" style="z-index:2;background:#fff">×</button>
+    <div class="cabinet-layout">
+      <div class="cabinet-sidebar">
+        <div class="user-avatar" id="cabinetAvatar">А</div>
+        <div class="user-name" id="cabinetName">Пользователь</div>
+        <div class="user-email" id="cabinetEmail">email@email.com</div>
+        <div class="cabinet-nav">
+          <div class="cabinet-nav-item active" onclick="switchCabTab('profile')">👤 Профиль</div>
+          <div class="cabinet-nav-item" onclick="switchCabTab('bookings')">📋 Бронирования</div>
+          <div class="cabinet-nav-item" onclick="switchCabTab('payments')">💳 Оплаты</div>
+          <div class="cabinet-nav-item" onclick="switchCabTab('cards')">🏦 Карты</div>
+          <div class="cabinet-nav-item" onclick="switchCabTab('reviews')">⭐ Мои отзывы</div>
+          <div class="cabinet-nav-item" onclick="switchCabTab('notifs')">🔔 Уведомления</div>
+          <div class="cabinet-nav-item" style="margin-top:16px;color:#e53e3e" onclick="doLogout()">🚪 Выйти</div>
+        </div>
+      </div>
+      <div class="cabinet-content">
 
-    // --- Counters animation (simple) ---
-    function animateCounter(id, to, duration) {
+        <!-- PROFILE -->
+        <div class="cabinet-section active" id="cab-profile">
+          <h3 style="margin-top:0">Личные данные</h3>
+          <div style="display:grid;gap:10px;max-width:500px">
+            <div class="form-row">
+              <div><label class="muted">Имя</label><input type="text" id="cab-fname" /></div>
+              <div><label class="muted">Фамилия</label><input type="text" id="cab-lname" /></div>
+            </div>
+            <div><label class="muted">E-mail</label><input type="email" id="cab-email" /></div>
+            <div><label class="muted">Телефон (WhatsApp)</label><input type="tel" id="cab-phone" /></div>
+            <div><label class="muted">Город</label><input type="text" id="cab-city" placeholder="Алматы" /></div>
+            <div><label class="muted">О себе</label><textarea id="cab-bio" rows="3" placeholder="Расскажите немного о себе..."></textarea></div>
+            <button class="btn" style="justify-self:start" onclick="saveProfile()">Сохранить изменения</button>
+          </div>
+          <div style="margin-top:24px;padding-top:20px;border-top:1px solid #f1f5f9">
+            <h4>Сменить пароль</h4>
+            <div style="display:grid;gap:8px;max-width:400px">
+              <input type="password" id="oldPass" placeholder="Текущий пароль" />
+              <input type="password" id="newPass" placeholder="Новый пароль" />
+              <input type="password" id="newPass2" placeholder="Повторите новый пароль" />
+              <button class="btn ghost" style="justify-self:start" onclick="changePassword()">Обновить пароль</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOOKINGS -->
+        <div class="cabinet-section" id="cab-bookings">
+          <h3 style="margin-top:0">История бронирований</h3>
+          <div id="userBookingsTable"></div>
+        </div>
+
+        <!-- PAYMENTS -->
+        <div class="cabinet-section" id="cab-payments">
+          <h3 style="margin-top:0">История оплат</h3>
+          <div id="userPaymentsTable"></div>
+        </div>
+
+        <!-- CARDS -->
+        <div class="cabinet-section" id="cab-cards">
+          <h3 style="margin-top:0">Банковские карты</h3>
+          <div id="savedCardsList" style="margin-bottom:16px"></div>
+          <div style="background:#f8fafc;padding:20px;border-radius:12px;max-width:480px">
+            <h4 style="margin-top:0">Привязать новую карту</h4>
+            <div style="display:grid;gap:10px">
+              <input type="text" id="newCardNumber" placeholder="Номер карты (16 цифр)" maxlength="19" oninput="formatCardNumber(this)" />
+              <div class="form-row">
+                <div><label class="muted">Имя держателя</label><input type="text" id="newCardHolder" placeholder="IVAN IVANOV" style="text-transform:uppercase" /></div>
+                <div><label class="muted">Срок действия</label><input type="text" id="newCardExpiry" placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this)" /></div>
+              </div>
+              <div style="max-width:100px"><label class="muted">CVV</label><input type="password" id="newCardCvv" placeholder="***" maxlength="3" /></div>
+              <div style="background:#fff3cd;padding:10px;border-radius:8px;font-size:12px;color:#856404">🔒 Данные карты защищены шифрованием. Демо-режим: реальные транзакции не выполняются.</div>
+              <button class="btn" style="justify-self:start" onclick="addCard()">Привязать карту</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- MY REVIEWS -->
+        <div class="cabinet-section" id="cab-reviews">
+          <h3 style="margin-top:0">Мои отзывы</h3>
+          <div id="myReviewsList"></div>
+        </div>
+
+        <!-- NOTIFICATIONS -->
+        <div class="cabinet-section" id="cab-notifs">
+          <h3 style="margin-top:0">Уведомления</h3>
+          <div id="notifsList"></div>
+          <div style="margin-top:16px;padding-top:16px;border-top:1px solid #f1f5f9">
+            <h4>Настройки уведомлений</h4>
+            <div style="display:grid;gap:8px;font-size:14px;max-width:340px">
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer"><input type="checkbox" id="notifEmail" checked style="width:16px;height:16px;flex-shrink:0"/><span>Уведомления на email</span></label>
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer"><input type="checkbox" id="notifWA" checked style="width:16px;height:16px;flex-shrink:0"/><span>Уведомления в WhatsApp</span></label>
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer"><input type="checkbox" id="notifBooking" checked style="width:16px;height:16px;flex-shrink:0"/><span>Подтверждение бронирования</span></label>
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer"><input type="checkbox" id="notifPayment" checked style="width:16px;height:16px;flex-shrink:0"/><span>Чек об оплате</span></label>
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer"><input type="checkbox" id="notifStatus" checked style="width:16px;height:16px;flex-shrink:0"/><span>Изменение статуса тура</span></label>
+              <button class="btn ghost" style="justify-self:start;margin-top:4px" onclick="showToast('Настройки уведомлений сохранены','success')">Сохранить настройки</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ADMIN PANEL
+============================================================ -->
+<div id="adminPanel" class="overlay hidden">
+  <div class="modal-box" style="max-width:1100px;padding:0">
+    <button class="modal-close" onclick="closeModal('adminPanel')" style="z-index:2;background:#fff;top:8px;right:8px">×</button>
+    <div class="admin-layout">
+      <div class="admin-sidebar">
+        <div class="admin-logo">⚙️ Администратор</div>
+        <div class="admin-nav-item active" onclick="switchAdminTab('dashboard')">📊 Дашборд</div>
+        <div class="admin-nav-item" onclick="switchAdminTab('users')">👥 Пользователи</div>
+        <div class="admin-nav-item" onclick="switchAdminTab('tours')">🌿 Туры</div>
+        <div class="admin-nav-item" onclick="switchAdminTab('bookings')">📋 Бронирования</div>
+        <div class="admin-nav-item" onclick="switchAdminTab('payments')">💰 Платежи</div>
+        <div class="admin-nav-item" onclick="switchAdminTab('reviews')">⭐ Отзывы</div>
+        <div class="admin-nav-item" onclick="switchAdminTab('applications')">📨 Заявки</div>
+        <div class="admin-nav-item" style="margin-top:auto;color:rgba(255,255,255,0.4)" onclick="doLogout()">🚪 Выйти</div>
+      </div>
+      <div class="admin-content">
+
+        <!-- DASHBOARD -->
+        <div class="admin-section active" id="adm-dashboard">
+          <h3 style="margin-top:0">Общая статистика</h3>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px" id="dashStats"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div>
+              <h4>Последние бронирования</h4>
+              <div id="recentBookings"></div>
+            </div>
+            <div>
+              <h4>Ожидают обработки</h4>
+              <div id="pendingItems"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- USERS -->
+        <div class="admin-section" id="adm-users">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+            <h3 style="margin:0">Пользователи</h3>
+            <input type="text" placeholder="Поиск пользователя..." style="max-width:220px;padding:7px 12px;font-size:13px" oninput="filterTable('usersTable',this.value)" />
+          </div>
+          <div style="overflow-x:auto"><table id="usersTable"><thead><tr><th>ID</th><th>Имя</th><th>Email</th><th>Телефон</th><th>Роль</th><th>Дата рег.</th><th>Действия</th></tr></thead><tbody id="usersBody"></tbody></table></div>
+        </div>
+
+        <!-- TOURS -->
+        <div class="admin-section" id="adm-tours">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+            <h3 style="margin:0">Управление турами</h3>
+            <button class="btn sm" onclick="openAddTourModal()">+ Добавить тур</button>
+          </div>
+          <div style="overflow-x:auto"><table><thead><tr><th>Тур</th><th>Дата</th><th>Мест</th><th>Цена</th><th>Статус</th><th>Действия</th></tr></thead><tbody id="toursBody"></tbody></table></div>
+        </div>
+
+        <!-- BOOKINGS -->
+        <div class="admin-section" id="adm-bookings">
+          <h3 style="margin-top:0">Бронирования</h3>
+          <div style="overflow-x:auto"><table><thead><tr><th>ID</th><th>Пользователь</th><th>Тур</th><th>Статус</th><th>Дата</th><th>Оплата</th><th>Действия</th></tr></thead><tbody id="bookingsBody"></tbody></table></div>
+        </div>
+
+        <!-- PAYMENTS -->
+        <div class="admin-section" id="adm-payments">
+          <h3 style="margin-top:0">Платежи</h3>
+          <div style="overflow-x:auto"><table><thead><tr><th>ID</th><th>Пользователь</th><th>Сумма</th><th>Статус</th><th>Метод</th><th>Дата</th><th>Чек</th></tr></thead><tbody id="paymentsBody"></tbody></table></div>
+        </div>
+
+        <!-- REVIEWS -->
+        <div class="admin-section" id="adm-reviews">
+          <h3 style="margin-top:0">Модерация отзывов</h3>
+          <div id="adminReviewsList"></div>
+        </div>
+
+        <!-- APPLICATIONS -->
+        <div class="admin-section" id="adm-applications">
+          <h3 style="margin-top:0">Заявки с сайта</h3>
+          <div style="overflow-x:auto"><table><thead><tr><th>Имя</th><th>Email</th><th>Телефон</th><th>Пакет</th><th>Статус</th><th>Дата</th><th>Действия</th></tr></thead><tbody id="applicationsBody"></tbody></table></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     BOOKING / PAYMENT MODAL
+============================================================ -->
+<div id="bookingModal" class="overlay hidden">
+  <div class="modal-box" style="max-width:520px">
+    <button class="modal-close" onclick="closeModal('bookingModal')">×</button>
+    <h2 style="margin-top:0;font-size:20px">Бронирование тура</h2>
+    <div id="bookingContent"></div>
+  </div>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div id="paymentModal" class="overlay hidden">
+  <div class="modal-box" style="max-width:480px">
+    <button class="modal-close" onclick="closeModal('paymentModal')">×</button>
+    <h2 style="margin-top:0;font-size:20px">Оплата тура</h2>
+    <div id="paymentContent"></div>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div id="toastContainer"></div>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+// ============================================================
+// DATA STORE (localStorage-backed)
+// ============================================================
+const DB = {
+  get(key) { try { return JSON.parse(localStorage.getItem('vb_'+key)) } catch(e) { return null }},
+  set(key, val) { try { localStorage.setItem('vb_'+key, JSON.stringify(val)) } catch(e) {} },
+  push(key, val) {
+    const arr = DB.get(key) || [];
+    val.id = val.id || Date.now();
+    arr.push(val);
+    DB.set(key, arr);
+    return val;
+  }
+};
+
+// ============================================================
+// INIT DEFAULT DATA
+// ============================================================
+function initData() {
+  if (!DB.get('initialized')) {
+    DB.set('users', [
+      { id: 1, name: 'Алия', surname: 'Нурова', email: 'user@test.kz', phone: '+7 701 111 0001', password: 'user123', role: 'user', city: 'Алматы', bio: '', regDate: '2024-11-01', notifEmail: true, notifWA: true },
+      { id: 2, name: 'Администратор', surname: '', email: 'admin@zelenyburabay.kz', phone: '+7 701 000 0000', password: 'admin123', role: 'admin', city: 'Щучинск', bio: '', regDate: '2024-01-01', notifEmail: true, notifWA: true }
+    ]);
+    DB.set('tours', [
+      { id: 1, name: 'Эко-выходные', dates: 'Август 4–8', duration: '5 дней', seats: 20, seatsLeft: 12, price: 100000, status: 'active' },
+      { id: 2, name: 'Глубокая программа', dates: 'Июнь 12–18', duration: '7 дней', seats: 15, seatsLeft: 8, price: 140000, status: 'active' },
+      { id: 3, name: 'Волонтёрский курс', dates: 'Сентябрь 1–14', duration: '14 дней', seats: 10, seatsLeft: 5, price: 280000, status: 'active' }
+    ]);
+    DB.set('bookings', [
+      { id: 1001, userId: 1, tourId: 2, tourName: 'Июнь 12–18, 7 дней', status: 'confirmed', date: '2025-05-20', amount: 140000, paid: true, paymentId: 5001 },
+      { id: 1002, userId: 1, tourId: 1, tourName: 'Август 4–8, 5 дней', status: 'pending', date: '2025-06-01', amount: 100000, paid: false, paymentId: null }
+    ]);
+    DB.set('payments', [
+      { id: 5001, userId: 1, bookingId: 1001, amount: 140000, status: 'success', method: 'card', last4: '4242', date: '2025-05-20', receiptSent: true }
+    ]);
+    DB.set('reviews', [
+      { id: 3001, userId: 1, userName: 'Алия Нурова', rating: 5, text: 'Это был лучший опыт — посадили 50 саженцев, услышали удивительные истории. Атмосфера как в большой семье.', tripDate: '2024-09', date: '2024-10-05', status: 'approved' },
+      { id: 3002, userId: 0, userName: 'Ербол К.', rating: 5, text: 'Привёл студентов — ребята получили практические навыки. Спасибо за четкую логистику.', tripDate: '2024-08', date: '2024-09-01', status: 'approved' }
+    ]);
+    DB.set('applications', [
+      { id: 4001, name: 'Иван Петров', email: 'ivan@mail.ru', phone: '+7 700 123 4567', package: '7', notes: 'Хотел бы с семьёй', status: 'new', date: '2025-06-01' }
+    ]);
+    DB.set('cards', []);
+    DB.set('notifications', [
+      { id: 1, userId: 1, type: 'booking', text: 'Бронирование #1001 подтверждено! Тур "Июнь 12–18, 7 дней"', date: '2025-05-20', read: false },
+      { id: 2, userId: 1, type: 'payment', text: 'Оплата 140 000 ₸ прошла успешно. Чек отправлен на email.', date: '2025-05-20', read: false }
+    ]);
+    DB.set('initialized', true);
+  }
+}
+initData();
+
+// ============================================================
+// AUTH STATE
+// ============================================================
+let currentUser = DB.get('session') || null;
+
+function getUsers() { return DB.get('users') || []; }
+function saveUsers(u) { DB.set('users', u); }
+
+function updateHeaderAuth() {
+  const zone = document.getElementById('headerAuthZone');
+  if (!zone) return;
+  if (currentUser) {
+    const initials = (currentUser.name||'?')[0].toUpperCase();
+    const isAdmin = currentUser.role === 'admin';
+    zone.innerHTML = `
+      ${isAdmin ? `<a href="#" onclick="openAdmin();return false" style="background:var(--accent);color:#fff;padding:7px 12px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none">⚙️ Панель</a>` : ''}
+      <a href="#" onclick="openCabinet();return false" style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:50px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;font-size:13px">
+        <span style="width:28px;height:28px;border-radius:50%;background:#fff;color:var(--accent);display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800">${initials}</span>
+        ${currentUser.name}
+      </a>
+    `;
+    // show review block
+    const rb = document.getElementById('addReviewBlock');
+    const rl = document.getElementById('reviewLoginPrompt');
+    if (rb) rb.style.display = 'block';
+    if (rl) rl.style.display = 'none';
+  } else {
+    zone.innerHTML = `<a href="#" onclick="openAuthModal('login');return false" class="cta" style="text-decoration:none">Войти</a>`;
+    const rb = document.getElementById('addReviewBlock');
+    const rl = document.getElementById('reviewLoginPrompt');
+    if (rb) rb.style.display = 'none';
+    if (rl) rl.style.display = 'block';
+  }
+}
+
+// ============================================================
+// MODAL HELPERS
+// ============================================================
+function openModal(id) {
+  document.getElementById(id).classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.add('hidden');
+  document.body.style.overflow = '';
+}
+function closeAllOverlays() {
+  document.querySelectorAll('.overlay').forEach(el => el.classList.add('hidden'));
+  document.body.style.overflow = '';
+}
+
+// ============================================================
+// AUTH FUNCTIONS
+// ============================================================
+function openAuthModal(tab) {
+  openModal('authModal');
+  switchAuthTab(tab || 'login');
+}
+function switchAuthTab(tab) {
+  document.querySelectorAll('.auth-tab').forEach((t,i) => t.classList.toggle('active', (i===0&&tab==='login')||(i===1&&tab==='register')));
+  document.getElementById('loginForm').classList.toggle('active', tab==='login');
+  document.getElementById('registerForm').classList.toggle('active', tab==='register');
+}
+
+function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPassword').value;
+  const err = document.getElementById('loginError');
+  const users = getUsers();
+  const user = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === pass);
+  if (!user) {
+    err.textContent = 'Неверный email или пароль';
+    err.style.display = 'block';
+    return;
+  }
+  err.style.display = 'none';
+  currentUser = user;
+  DB.set('session', user);
+  closeModal('authModal');
+  updateHeaderAuth();
+  showToast(`Добро пожаловать, ${user.name}! 🌿`, 'success');
+}
+
+function doRegister() {
+  const name = document.getElementById('regName').value.trim();
+  const surname = document.getElementById('regSurname').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const phone = document.getElementById('regPhone').value.trim();
+  const pass = document.getElementById('regPassword').value;
+  const pass2 = document.getElementById('regPassword2').value;
+  const err = document.getElementById('regError');
+
+  if (!name || !email || !phone || !pass) { err.textContent='Заполните все обязательные поля'; err.style.display='block'; return; }
+  if (pass.length < 6) { err.textContent='Пароль минимум 6 символов'; err.style.display='block'; return; }
+  if (pass !== pass2) { err.textContent='Пароли не совпадают'; err.style.display='block'; return; }
+
+  const users = getUsers();
+  if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
+    err.textContent = 'Пользователь с таким email уже существует'; err.style.display='block'; return;
+  }
+  err.style.display='none';
+  const newUser = { id: Date.now(), name, surname, email, phone, password: pass, role: 'user', city:'', bio:'', regDate: new Date().toISOString().split('T')[0], notifEmail: true, notifWA: true };
+  users.push(newUser);
+  saveUsers(users);
+  currentUser = newUser;
+  DB.set('session', newUser);
+  closeModal('authModal');
+  updateHeaderAuth();
+  showToast(`Добро пожаловать, ${name}! Аккаунт создан. 🌿`, 'success');
+  sendNotification(newUser.id, 'Регистрация успешна! Добро пожаловать в Зелёный Бурабай.', 'info');
+}
+
+function doLogout() {
+  currentUser = null;
+  DB.set('session', null);
+  closeAllOverlays();
+  updateHeaderAuth();
+  showToast('Вы вышли из аккаунта', 'info');
+}
+
+// ============================================================
+// USER CABINET
+// ============================================================
+function openCabinet() {
+  if (!currentUser) { openAuthModal('login'); return; }
+  const u = currentUser;
+  document.getElementById('cabinetAvatar').textContent = (u.name||'?')[0].toUpperCase();
+  document.getElementById('cabinetName').textContent = u.name + (u.surname ? ' ' + u.surname : '');
+  document.getElementById('cabinetEmail').textContent = u.email;
+
+  // fill profile fields
+  const setVal = (id,v) => { const el=document.getElementById(id); if(el) el.value=v||''; };
+  setVal('cab-fname', u.name);
+  setVal('cab-lname', u.surname);
+  setVal('cab-email', u.email);
+  setVal('cab-phone', u.phone);
+  setVal('cab-city', u.city);
+  setVal('cab-bio', u.bio);
+
+  switchCabTab('profile');
+  openModal('cabinetPanel');
+}
+
+function switchCabTab(tab) {
+  document.querySelectorAll('.cabinet-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.cabinet-nav-item').forEach(n => n.classList.remove('active'));
+  const el = document.getElementById('cab-' + tab);
+  if (el) el.classList.add('active');
+  event && event.target && event.target.classList.add('active');
+
+  if (tab === 'bookings') renderUserBookings();
+  if (tab === 'payments') renderUserPayments();
+  if (tab === 'cards') renderUserCards();
+  if (tab === 'reviews') renderMyReviews();
+  if (tab === 'notifs') renderNotifications();
+}
+
+function saveProfile() {
+  if (!currentUser) return;
+  const users = getUsers();
+  const idx = users.findIndex(u => u.id === currentUser.id);
+  if (idx < 0) return;
+  users[idx].name = document.getElementById('cab-fname').value.trim() || users[idx].name;
+  users[idx].surname = document.getElementById('cab-lname').value.trim();
+  users[idx].email = document.getElementById('cab-email').value.trim() || users[idx].email;
+  users[idx].phone = document.getElementById('cab-phone').value.trim();
+  users[idx].city = document.getElementById('cab-city').value.trim();
+  users[idx].bio = document.getElementById('cab-bio').value.trim();
+  saveUsers(users);
+  currentUser = users[idx];
+  DB.set('session', currentUser);
+  document.getElementById('cabinetName').textContent = currentUser.name + (currentUser.surname ? ' ' + currentUser.surname : '');
+  updateHeaderAuth();
+  showToast('Профиль обновлён ✓', 'success');
+}
+
+function changePassword() {
+  if (!currentUser) return;
+  const old = document.getElementById('oldPass').value;
+  const np = document.getElementById('newPass').value;
+  const np2 = document.getElementById('newPass2').value;
+  if (old !== currentUser.password) { showToast('Текущий пароль неверен', 'warning'); return; }
+  if (np.length < 6) { showToast('Новый пароль минимум 6 символов', 'warning'); return; }
+  if (np !== np2) { showToast('Пароли не совпадают', 'warning'); return; }
+  const users = getUsers();
+  const idx = users.findIndex(u => u.id === currentUser.id);
+  users[idx].password = np;
+  saveUsers(users);
+  currentUser = users[idx];
+  DB.set('session', currentUser);
+  ['oldPass','newPass','newPass2'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+  showToast('Пароль обновлён ✓', 'success');
+}
+
+function renderUserBookings() {
+  const bookings = (DB.get('bookings')||[]).filter(b => b.userId === currentUser.id);
+  const el = document.getElementById('userBookingsTable');
+  if (!el) return;
+  if (!bookings.length) { el.innerHTML='<p style="color:var(--muted)">Бронирований пока нет.</p>'; return; }
+  el.innerHTML = '<div style="overflow-x:auto"><table><thead><tr><th>ID</th><th>Тур</th><th>Дата брони</th><th>Сумма</th><th>Статус</th><th>Оплата</th><th></th></tr></thead><tbody>' +
+    bookings.map(b => `<tr>
+      <td>#${b.id}</td>
+      <td>${b.tourName}</td>
+      <td>${b.date}</td>
+      <td>${b.amount.toLocaleString()} ₸</td>
+      <td>${statusBadge(b.status)}</td>
+      <td>${b.paid ? '<span class="badge green">Оплачено</span>' : `<button class="btn sm" onclick="openPaymentModal(${b.id})">Оплатить</button>`}</td>
+      <td>${b.paid ? `<button class="btn ghost sm" onclick="showReceipt(${b.id})">Чек</button>` : ''}</td>
+    </tr>`).join('') + '</tbody></table></div>';
+}
+
+function renderUserPayments() {
+  const payments = (DB.get('payments')||[]).filter(p => p.userId === currentUser.id);
+  const el = document.getElementById('userPaymentsTable');
+  if (!el) return;
+  if (!payments.length) { el.innerHTML='<p style="color:var(--muted)">Платежей пока нет.</p>'; return; }
+  el.innerHTML = '<div style="overflow-x:auto"><table><thead><tr><th>ID</th><th>Бронь</th><th>Сумма</th><th>Статус</th><th>Дата</th><th>Чек</th></tr></thead><tbody>' +
+    payments.map(p => `<tr>
+      <td>#${p.id}</td>
+      <td>#${p.bookingId}</td>
+      <td>${p.amount.toLocaleString()} ₸</td>
+      <td><span class="badge green">Успешно</span></td>
+      <td>${p.date}</td>
+      <td><button class="btn ghost sm" onclick="showReceipt(${p.bookingId})">Скачать</button></td>
+    </tr>`).join('') + '</tbody></table></div>';
+}
+
+function renderUserCards() {
+  const userCards = (DB.get('cards')||[]).filter(c => c.userId === currentUser.id);
+  const el = document.getElementById('savedCardsList');
+  if (!el) return;
+  if (!userCards.length) { el.innerHTML='<p style="color:var(--muted);font-size:13px">Карты не привязаны.</p>'; return; }
+  el.innerHTML = userCards.map(c => `
+    <div style="display:flex;align-items:center;gap:12px;background:#f8fafc;padding:14px;border-radius:10px;margin-bottom:8px">
+      <div style="font-size:24px">${c.brand==='Visa'?'💳':'🏦'}</div>
+      <div style="flex:1">
+        <div style="font-weight:700">${c.brand} •••• ${c.last4}</div>
+        <div style="font-size:12px;color:var(--muted)">${c.holder} • ${c.expiry}</div>
+      </div>
+      ${c.isDefault ? '<span class="badge green">Основная</span>' : `<button class="btn ghost sm" onclick="setDefaultCard(${c.id})">Сделать основной</button>`}
+      <button class="btn danger sm" onclick="removeCard(${c.id})">✕</button>
+    </div>
+  `).join('');
+}
+
+function renderMyReviews() {
+  const reviews = (DB.get('reviews')||[]).filter(r => r.userId === currentUser.id);
+  const el = document.getElementById('myReviewsList');
+  if (!el) return;
+  if (!reviews.length) { el.innerHTML='<p style="color:var(--muted)">Вы ещё не оставляли отзывов.</p>'; return; }
+  el.innerHTML = reviews.map(r => `
+    <div class="review-card" style="margin-bottom:10px">
+      <div class="review-header">
+        <div><div class="stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div></div>
+        <div class="review-date">${r.date} • ${r.status==='approved'?'<span class="badge green">Опубликован</span>':'<span class="badge orange">На модерации</span>'}</div>
+      </div>
+      <p style="margin:8px 0 0;color:#444;font-size:14px">${r.text}</p>
+      <div style="font-size:12px;color:var(--muted);margin-top:6px">Дата поездки: ${r.tripDate}</div>
+    </div>
+  `).join('');
+}
+
+function renderNotifications() {
+  const notifs = (DB.get('notifications')||[]).filter(n => n.userId === currentUser.id).reverse();
+  const el = document.getElementById('notifsList');
+  if (!el) return;
+  if (!notifs.length) { el.innerHTML='<p style="color:var(--muted)">Уведомлений нет.</p>'; return; }
+  const icons = { booking:'📋', payment:'💰', info:'ℹ️', status:'🔄' };
+  el.innerHTML = `
+    <div style="display:flex;justify-content:flex-end;margin-bottom:10px">
+      <button class="btn danger sm" onclick="deleteAllNotifications()">🗑 Удалить все</button>
+    </div>
+    ${notifs.map(n => `
+      <div class="notif-item" id="notif-${n.id}">
+        <div class="notif-icon ${n.type==='payment'?'green':n.type==='booking'?'blue':'orange'}">${icons[n.type]||'🔔'}</div>
+        <div style="flex:1">
+          <div style="font-size:14px;font-weight:600">${n.text}</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:3px">${n.date}</div>
+        </div>
+        ${!n.read ? '<div class="notif-unread"></div>' : ''}
+        <button onclick="deleteNotification(${n.id})" style="border:none;background:none;cursor:pointer;color:#aaa;font-size:18px;padding:4px 6px;border-radius:6px;flex-shrink:0" onmouseover="this.style.color='#e53e3e';this.style.background='#fff0f0'" onmouseout="this.style.color='#aaa';this.style.background='none'">×</button>
+      </div>
+    `).join('')}
+  `;
+  // mark all as read
+  const all = DB.get('notifications') || [];
+  all.forEach(n => { if (n.userId === currentUser.id) n.read = true; });
+  DB.set('notifications', all);
+}
+
+function deleteNotification(id) {
+  const all = (DB.get('notifications') || []).filter(n => n.id !== id);
+  DB.set('notifications', all);
+  renderNotifications();
+}
+
+function deleteAllNotifications() {
+  if (!confirm('Удалить все уведомления?')) return;
+  const all = (DB.get('notifications') || []).filter(n => n.userId !== currentUser.id);
+  DB.set('notifications', all);
+  renderNotifications();
+  showToast('Все уведомления удалены', 'info');
+}
+
+// ============================================================
+// CARDS
+// ============================================================
+function formatCardNumber(el) {
+  let v = el.value.replace(/\D/g,'').substring(0,16);
+  el.value = v.replace(/(.{4})/g,'$1 ').trim();
+}
+function formatExpiry(el) {
+  let v = el.value.replace(/\D/g,'');
+  if (v.length >= 2) v = v.substring(0,2) + '/' + v.substring(2,4);
+  el.value = v;
+}
+function detectBrand(num) {
+  return num.startsWith('4') ? 'Visa' : num.startsWith('5') ? 'Mastercard' : 'Card';
+}
+function addCard() {
+  if (!currentUser) return;
+  const num = document.getElementById('newCardNumber').value.replace(/\s/g,'');
+  const holder = document.getElementById('newCardHolder').value.trim();
+  const expiry = document.getElementById('newCardExpiry').value.trim();
+  const cvv = document.getElementById('newCardCvv').value.trim();
+  if (num.length < 16 || !holder || !expiry || cvv.length < 3) {
+    showToast('Заполните все данные карты', 'warning'); return;
+  }
+  const cards = DB.get('cards') || [];
+  const userCards = cards.filter(c => c.userId === currentUser.id);
+  const card = { id: Date.now(), userId: currentUser.id, last4: num.slice(-4), holder: holder.toUpperCase(), expiry, brand: detectBrand(num), isDefault: userCards.length === 0 };
+  cards.push(card);
+  DB.set('cards', cards);
+  ['newCardNumber','newCardHolder','newCardExpiry','newCardCvv'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+  renderUserCards();
+  showToast('Карта успешно привязана 💳', 'success');
+}
+function removeCard(id) {
+  const cards = (DB.get('cards')||[]).filter(c => c.id !== id);
+  DB.set('cards', cards);
+  renderUserCards();
+  showToast('Карта удалена', 'info');
+}
+function setDefaultCard(id) {
+  const cards = DB.get('cards') || [];
+  cards.forEach(c => { if (c.userId === currentUser.id) c.isDefault = c.id === id; });
+  DB.set('cards', cards);
+  renderUserCards();
+  showToast('Основная карта обновлена', 'success');
+}
+
+// ============================================================
+// REVIEWS
+// ============================================================
+let selectedRating = 0;
+
+function initStarRating() {
+  const stars = document.querySelectorAll('#starRating span');
+  stars.forEach((s,i) => {
+    s.addEventListener('mouseenter', () => stars.forEach((st,j) => st.textContent = j<=i ? '★' : '☆'));
+    s.addEventListener('mouseleave', () => stars.forEach((st,j) => st.textContent = j<selectedRating ? '★' : '☆'));
+    s.addEventListener('click', () => { selectedRating = i+1; stars.forEach((st,j) => st.textContent = j<selectedRating ? '★' : '☆'); });
+  });
+}
+
+function submitReview() {
+  if (!currentUser) { openAuthModal('login'); return; }
+  if (!selectedRating) { showToast('Выберите оценку', 'warning'); return; }
+  const text = document.getElementById('reviewText').value.trim();
+  if (text.length < 10) { showToast('Напишите отзыв (минимум 10 символов)', 'warning'); return; }
+  const tripDate = document.getElementById('reviewTripDate').value;
+  const review = {
+    id: Date.now(), userId: currentUser.id,
+    userName: currentUser.name + (currentUser.surname ? ' ' + currentUser.surname.charAt(0) + '.' : ''),
+    rating: selectedRating, text, tripDate: tripDate || 'Не указана',
+    date: new Date().toISOString().split('T')[0], status: 'pending'
+  };
+  DB.push('reviews', review);
+  document.getElementById('reviewText').value = '';
+  selectedRating = 0;
+  document.querySelectorAll('#starRating span').forEach(s => s.textContent = '☆');
+  showToast('Отзыв отправлен на модерацию ✓', 'success');
+  renderReviewsSection();
+}
+
+function renderReviewsSection() {
+  const reviews = (DB.get('reviews')||[]).filter(r => r.status === 'approved');
+  const el = document.getElementById('reviewsList');
+  if (!el) return;
+  if (!reviews.length) { el.innerHTML='<p style="color:var(--muted)">Отзывов пока нет.</p>'; return; }
+  el.innerHTML = reviews.reverse().map(r => `
+    <div class="review-card">
+      <div class="review-header">
+        <div>
+          <div class="review-author">${r.userName}</div>
+          <div class="stars" style="font-size:14px">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
+        </div>
+        <div class="review-date">${r.date}${r.tripDate && r.tripDate!=='Не указана' ? ' • Поездка: '+r.tripDate : ''}</div>
+      </div>
+      <p style="margin:8px 0 0;color:#444;font-size:14px;line-height:1.6">${r.text}</p>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// BOOKING & PAYMENT
+// ============================================================
+function openBookingModal(tourName, price) {
+  if (!currentUser) {
+    showToast('Войдите в аккаунт для бронирования', 'info');
+    openAuthModal('login');
+    return;
+  }
+  const el = document.getElementById('bookingContent');
+  el.innerHTML = `
+    <div style="background:rgba(47,158,79,0.06);padding:16px;border-radius:10px;margin-bottom:16px">
+      <div style="font-weight:700;font-size:15px">${tourName}</div>
+      <div style="font-size:20px;font-weight:800;color:var(--accent);margin-top:4px">${parseInt(price).toLocaleString()} ₸</div>
+    </div>
+    <div style="display:grid;gap:10px">
+      <div><label class="muted">Количество мест</label><input type="number" id="bkSeats" value="1" min="1" max="5" style="max-width:100px"/></div>
+      <div><label class="muted">Пожелания / комментарий</label><textarea id="bkNotes" rows="2" placeholder="Особые пожелания..."></textarea></div>
+      <div style="display:flex;align-items:flex-start;gap:8px"><label style="font-size:13px;display:flex;align-items:flex-start;gap:6px;cursor:pointer"><input type="checkbox" id="bkAgree" style="margin-top:2px;flex-shrink:0;width:auto"/> Соглашаюсь с правилами участия</label></div>
+    </div>
+    <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" onclick="confirmBooking('${tourName}',${price})">Подтвердить бронирование</button>
+      <button class="btn ghost" onclick="closeModal('bookingModal')">Отмена</button>
+    </div>
+  `;
+  openModal('bookingModal');
+}
+
+function confirmBooking(tourName, price) {
+  if (!document.getElementById('bkAgree').checked) { showToast('Подтвердите согласие с правилами', 'warning'); return; }
+  const seats = parseInt(document.getElementById('bkSeats').value) || 1;
+  const total = price * seats;
+  const booking = DB.push('bookings', {
+    userId: currentUser.id, tourName, status: 'confirmed',
+    date: new Date().toISOString().split('T')[0], amount: total, paid: false, paymentId: null
+  });
+  closeModal('bookingModal');
+  sendNotification(currentUser.id, `Бронирование #${booking.id} подтверждено! Тур "${tourName}" на ${seats} чел.`, 'booking');
+  showToast(`Бронирование подтверждено! #${booking.id} 🎉`, 'success');
+  // simulate email & WA
+  simulateSendEmail(currentUser.email, `Бронирование подтверждено — ${tourName}`, `Ваше бронирование #${booking.id} подтверждено. Сумма: ${total.toLocaleString()} ₸`);
+  simulateSendWA(currentUser.phone, `Бронирование #${booking.id} подтверждено! Тур "${tourName}". Сумма: ${total.toLocaleString()} ₸`);
+  // offer payment
+  setTimeout(() => openPaymentModal(booking.id), 1000);
+}
+
+function openPaymentModal(bookingId) {
+  if (!currentUser) return;
+  const booking = (DB.get('bookings')||[]).find(b => b.id === bookingId);
+  if (!booking || booking.paid) { showToast('Бронирование уже оплачено', 'info'); return; }
+  const userCards = (DB.get('cards')||[]).filter(c => c.userId === currentUser.id);
+  const el = document.getElementById('paymentContent');
+  el.innerHTML = `
+    <div style="background:rgba(47,158,79,0.06);padding:14px;border-radius:10px;margin-bottom:16px">
+      <div style="font-size:13px;color:var(--muted)">Бронирование #${booking.id}</div>
+      <div style="font-weight:700">${booking.tourName}</div>
+      <div style="font-size:22px;font-weight:800;color:var(--accent);margin-top:4px">${booking.amount.toLocaleString()} ₸</div>
+    </div>
+
+    ${userCards.length > 0 ? `
+      <div style="margin-bottom:16px">
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:8px">Сохранённые карты:</label>
+        ${userCards.map(c => `
+          <label style="display:flex;align-items:center;gap:10px;padding:12px;border:1.5px solid rgba(15,23,42,0.1);border-radius:10px;margin-bottom:6px;cursor:pointer">
+            <input type="radio" name="payCard" value="${c.id}" ${c.isDefault?'checked':''} />
+            <div style="flex:1">
+              <div style="font-weight:700">${c.brand} •••• ${c.last4}</div>
+              <div style="font-size:12px;color:var(--muted)">${c.holder} • ${c.expiry}</div>
+            </div>
+          </label>
+        `).join('')}
+        <label style="display:flex;align-items:center;gap:10px;padding:12px;border:1.5px solid rgba(15,23,42,0.1);border-radius:10px;cursor:pointer">
+          <input type="radio" name="payCard" value="new" />
+          <span style="font-size:13px;font-weight:600">+ Новая карта</span>
+        </label>
+      </div>
+      <div id="savedCardCvv" style="margin-bottom:12px">
+        <label class="muted" style="display:block;margin-bottom:4px">CVV для подтверждения:</label>
+        <input type="password" id="payCardCvvSaved" placeholder="***" maxlength="3" style="max-width:80px"/>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">🔒 CVV не сохраняется</div>
+      </div>
+    ` : `<p style="color:var(--muted);font-size:13px">Нет привязанных карт. Введите данные:</p>`}
+
+    <div id="newCardForm" style="${userCards.length?'display:none':'display:grid;gap:8px'}">
+      <input type="text" id="payCardNum" placeholder="Номер карты" maxlength="19" oninput="formatCardNumber(this)" />
+      <div class="form-row">
+        <div><label class="muted">Имя держателя</label><input type="text" id="payCardHolder" placeholder="IVAN IVANOV" /></div>
+        <div><label class="muted">Срок</label><input type="text" id="payCardExp" placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this)" /></div>
+      </div>
+      <div><label class="muted">CVV</label><input type="password" id="payCardCvv" placeholder="***" maxlength="3" style="max-width:80px" /></div>
+      <label style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px"><input type="checkbox" id="savePayCard" checked style="width:auto;flex-shrink:0"/> Сохранить карту для следующих оплат</label>
+    </div>
+
+    <div style="background:#fff3cd;padding:10px;border-radius:8px;font-size:12px;color:#856404;margin:12px 0">🔒 Демо-режим: реальные транзакции не выполняются</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" onclick="processPayment(${bookingId},${booking.amount})">Оплатить ${booking.amount.toLocaleString()} ₸</button>
+      <button class="btn ghost" onclick="closeModal('paymentModal')">Отмена</button>
+    </div>
+  `;
+  openModal('paymentModal');
+  setTimeout(() => {
+    document.querySelectorAll('input[name="payCard"]').forEach(r => {
+      r.addEventListener('change', () => {
+        const ncf = document.getElementById('newCardForm');
+        const scvv = document.getElementById('savedCardCvv');
+        if (ncf) ncf.style.display = r.value === 'new' ? 'grid' : 'none';
+        if (scvv) scvv.style.display = r.value === 'new' ? 'none' : 'block';
+      });
+    });
+  }, 100);
+}
+
+function processPayment(bookingId, amount) {
+  const el = document.getElementById('paymentContent');
+  el.innerHTML = '<div style="text-align:center;padding:40px"><div style="font-size:48px;margin-bottom:16px">⏳</div><p>Обрабатываем платёж...</p></div>';
+  setTimeout(() => {
+    const booking = (DB.get('bookings')||[]).find(b => b.id === bookingId);
+    if (!booking) return;
+    // determine card used
+    const radioChecked = document.querySelector('input[name="payCard"]:checked');
+    const cardId = radioChecked ? radioChecked.value : 'new';
+    let last4 = '4242';
+    let cardBrand = 'Card';
+    if (cardId !== 'new') {
+      const card = (DB.get('cards')||[]).find(c => c.id == cardId);
+      if (card) { last4 = card.last4; cardBrand = card.brand; }
+    } else {
+      const numEl = document.getElementById('payCardNum');
+      const num = numEl ? numEl.value.replace(/\s/g,'') : '';
+      last4 = num.slice(-4) || '0000';
+      cardBrand = detectBrand(num);
+      // auto-save card if checkbox checked (default: checked)
+      const saveBox = document.getElementById('savePayCard');
+      if (num.length === 16 && (!saveBox || saveBox.checked)) {
+        const holder = (document.getElementById('payCardHolder')||{}).value || '';
+        const expiry = (document.getElementById('payCardExp')||{}).value || '';
+        const cards = DB.get('cards') || [];
+        const userCards = cards.filter(c => c.userId === currentUser.id);
+        // avoid duplicates
+        const alreadySaved = userCards.find(c => c.last4 === last4 && c.expiry === expiry);
+        if (!alreadySaved) {
+          cards.push({ id: Date.now(), userId: currentUser.id, last4, holder: holder.toUpperCase(), expiry, brand: cardBrand, isDefault: userCards.length === 0 });
+          DB.set('cards', cards);
+          showToast('Карта сохранена для следующих оплат 💳', 'success');
+        }
+      }
+    }
+
+    // Save payment
+    const payment = DB.push('payments', { userId: currentUser.id, bookingId, amount, status: 'success', method: 'card', last4, date: new Date().toISOString().split('T')[0], receiptSent: true });
+
+    // Update booking
+    const bookings = DB.get('bookings') || [];
+    const bi = bookings.findIndex(b => b.id === bookingId);
+    if (bi >= 0) { bookings[bi].paid = true; bookings[bi].paymentId = payment.id; }
+    DB.set('bookings', bookings);
+
+    // Send notifications
+    sendNotification(currentUser.id, `Оплата ${amount.toLocaleString()} ₸ прошла успешно. Чек отправлен на ${currentUser.email} и WhatsApp.`, 'payment');
+    simulateSendEmail(currentUser.email, `Чек об оплате — ${booking.tourName}`, `Оплата ${amount.toLocaleString()} ₸ успешно выполнена. Бронирование #${bookingId} подтверждено.`);
+    simulateSendWA(currentUser.phone, `✅ Оплата ${amount.toLocaleString()} ₸ принята! Чек #${payment.id} для бронирования "${booking.tourName}".`);
+
+    // Show receipt
+    el.innerHTML = `
+      <div style="text-align:center;padding:20px 0">
+        <div style="font-size:56px;margin-bottom:8px">✅</div>
+        <h3 style="margin:0 0 4px;color:var(--accent)">Оплата прошла успешно!</h3>
+        <p style="color:var(--muted);font-size:13px">Чек отправлен на ${currentUser.email} и WhatsApp</p>
+      </div>
+      <div style="background:#f8fafc;padding:16px;border-radius:12px;font-size:13px">
+        <div style="font-weight:700;font-size:15px;margin-bottom:12px">📄 Электронный чек</div>
+        <div style="display:grid;gap:6px">
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Номер чека</span><span>#${payment.id}</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Тур</span><span>${booking.tourName}</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Карта</span><span>•••• ${last4}</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Сумма</span><strong style="color:var(--accent)">${amount.toLocaleString()} ₸</strong></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Дата</span><span>${new Date().toLocaleDateString('ru-RU')}</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Статус</span><span class="badge green">Оплачено</span></div>
+        </div>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn" onclick="closeModal('paymentModal')">Закрыть</button>
+        <button class="btn ghost" onclick="printReceipt(${payment.id})">🖨️ Печать</button>
+      </div>
+    `;
+    showToast('Оплата прошла успешно! Чек отправлен. 💳✓', 'success');
+  }, 2000);
+}
+
+function showReceipt(bookingId) {
+  const booking = (DB.get('bookings')||[]).find(b => b.id === bookingId);
+  const payment = booking && booking.paymentId ? (DB.get('payments')||[]).find(p => p.id === booking.paymentId) : null;
+  if (!payment) { showToast('Чек не найден', 'warning'); return; }
+  const el = document.getElementById('paymentContent');
+  el.innerHTML = `
+    <div style="background:#f8fafc;padding:20px;border-radius:12px;font-size:14px">
+      <div style="font-weight:800;font-size:16px;margin-bottom:16px;text-align:center">📄 ЭЛЕКТРОННЫЙ ЧЕК</div>
+      <div style="text-align:center;margin-bottom:16px;font-size:13px;color:var(--muted)">Эко-курорт «Зелёный Бурабай»</div>
+      <div style="display:grid;gap:8px">
+        <div style="display:flex;justify-content:space-between;border-bottom:1px dashed #e2e8f0;padding-bottom:6px"><span style="color:var(--muted)">Номер чека</span><span>#${payment.id}</span></div>
+        <div style="display:flex;justify-content:space-between;border-bottom:1px dashed #e2e8f0;padding-bottom:6px"><span style="color:var(--muted)">Тур</span><span>${booking.tourName}</span></div>
+        <div style="display:flex;justify-content:space-between;border-bottom:1px dashed #e2e8f0;padding-bottom:6px"><span style="color:var(--muted)">Покупатель</span><span>${currentUser.name}</span></div>
+        <div style="display:flex;justify-content:space-between;border-bottom:1px dashed #e2e8f0;padding-bottom:6px"><span style="color:var(--muted)">Способ оплаты</span><span>Карта •••• ${payment.last4}</span></div>
+        <div style="display:flex;justify-content:space-between;padding-top:4px"><span style="font-weight:700">ИТОГО</span><strong style="color:var(--accent);font-size:16px">${payment.amount.toLocaleString()} ₸</strong></div>
+      </div>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn" onclick="closeModal('paymentModal')">Закрыть</button>
+      <button class="btn ghost" onclick="printReceipt(${payment.id})">🖨️ Печать</button>
+    </div>
+  `;
+  openModal('paymentModal');
+}
+
+function printReceipt(paymentId) {
+  showToast('Чек отправлен на печать (демо)', 'info');
+}
+
+// ============================================================
+// NOTIFICATIONS
+// ============================================================
+function sendNotification(userId, text, type) {
+  DB.push('notifications', { userId, text, type: type||'info', date: new Date().toISOString().split('T')[0], read: false });
+}
+function simulateSendEmail(email, subject, body) {
+  console.log(`[EMAIL] To: ${email}\nSubject: ${subject}\n${body}`);
+  showToast(`📧 Email отправлен на ${email}`, 'info');
+}
+function simulateSendWA(phone, text) {
+  console.log(`[WHATSAPP] To: ${phone}\n${text}`);
+  showToast(`💬 WhatsApp уведомление → ${phone}`, 'info');
+}
+
+// ============================================================
+// ADMIN PANEL
+// ============================================================
+function openAdmin() {
+  if (!currentUser || currentUser.role !== 'admin') { showToast('Доступ запрещён', 'warning'); return; }
+  switchAdminTab('dashboard');
+  openModal('adminPanel');
+}
+
+function switchAdminTab(tab) {
+  document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.admin-nav-item').forEach(n => n.classList.remove('active'));
+  const el = document.getElementById('adm-' + tab);
+  if (el) el.classList.add('active');
+  event && event.target && event.target.classList.add('active');
+
+  if (tab === 'dashboard') renderDashboard();
+  if (tab === 'users') renderAdminUsers();
+  if (tab === 'tours') renderAdminTours();
+  if (tab === 'bookings') renderAdminBookings();
+  if (tab === 'payments') renderAdminPayments();
+  if (tab === 'reviews') renderAdminReviews();
+  if (tab === 'applications') renderAdminApplications();
+}
+
+function renderDashboard() {
+  const users = getUsers().filter(u => u.role !== 'admin');
+  const bookings = DB.get('bookings') || [];
+  const payments = DB.get('payments') || [];
+  const reviews = (DB.get('reviews')||[]).filter(r => r.status === 'pending');
+  const totalRevenue = payments.reduce((s,p) => s + (p.amount||0), 0);
+
+  const stats = document.getElementById('dashStats');
+  if (stats) stats.innerHTML = [
+    { label:'Пользователи', val: users.length, icon:'👥', color:'var(--accent-2)' },
+    { label:'Бронирования', val: bookings.length, icon:'📋', color:'var(--accent)' },
+    { label:'Выручка', val: totalRevenue.toLocaleString()+' ₸', icon:'💰', color:'#ed8936' },
+    { label:'На модерации', val: reviews.length, icon:'⭐', color:'#e53e3e' }
+  ].map(s => `
+    <div style="background:#fff;padding:16px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.04)">
+      <div style="font-size:28px;margin-bottom:8px">${s.icon}</div>
+      <div style="font-size:20px;font-weight:800;color:${s.color}">${s.val}</div>
+      <div style="font-size:12px;color:var(--muted)">${s.label}</div>
+    </div>
+  `).join('');
+
+  const rb = document.getElementById('recentBookings');
+  if (rb) rb.innerHTML = bookings.slice(-5).reverse().map(b => `
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f1f5f9;font-size:13px">
+      <div><strong>#${b.id}</strong> ${b.tourName}</div>
+      <div>${statusBadge(b.status)}</div>
+    </div>
+  `).join('') || '<p style="color:var(--muted);font-size:13px">Нет бронирований</p>';
+
+  const pi = document.getElementById('pendingItems');
+  if (pi) {
+    const apps = (DB.get('applications')||[]).filter(a => a.status === 'new');
+    pi.innerHTML = `<div style="font-size:13px">
+      <div style="padding:8px;background:#fff3cd;border-radius:8px;margin-bottom:6px">📨 Новых заявок: <strong>${apps.length}</strong></div>
+      <div style="padding:8px;background:rgba(47,158,79,0.08);border-radius:8px;margin-bottom:6px">⭐ Отзывов на проверке: <strong>${reviews.length}</strong></div>
+      <div style="padding:8px;background:rgba(43,108,176,0.08);border-radius:8px">💳 Неоплаченных броней: <strong>${bookings.filter(b=>!b.paid).length}</strong></div>
+    </div>`;
+  }
+}
+
+function renderAdminUsers() {
+  const users = getUsers();
+  const body = document.getElementById('usersBody');
+  if (!body) return;
+  body.innerHTML = users.map(u => `<tr>
+    <td>${u.id}</td>
+    <td>${u.name} ${u.surname||''}</td>
+    <td>${u.email}</td>
+    <td>${u.phone||'—'}</td>
+    <td>${u.role==='admin'?'<span class="badge red">Админ</span>':'<span class="badge blue">Пользователь</span>'}</td>
+    <td>${u.regDate||'—'}</td>
+    <td><button class="btn ghost sm" onclick="adminDeleteUser(${u.id})">Удалить</button></td>
+  </tr>`).join('');
+}
+
+function adminDeleteUser(id) {
+  if (!confirm('Удалить пользователя?')) return;
+  saveUsers(getUsers().filter(u => u.id !== id));
+  renderAdminUsers();
+  showToast('Пользователь удалён', 'info');
+}
+
+function renderAdminTours() {
+  const tours = DB.get('tours') || [];
+  const body = document.getElementById('toursBody');
+  if (!body) return;
+  body.innerHTML = tours.map(t => `<tr>
+    <td><strong>${t.name}</strong></td>
+    <td>${t.dates}</td>
+    <td>${t.seatsLeft}/${t.seats}</td>
+    <td>${t.price.toLocaleString()} ₸</td>
+    <td>${t.status==='active'?'<span class="badge green">Активен</span>':'<span class="badge gray">Неактивен</span>'}</td>
+    <td>
+      <button class="btn ghost sm" onclick="toggleTourStatus(${t.id})">Скрыть/Показать</button>
+    </td>
+  </tr>`).join('');
+}
+
+function openAddTourModal() {
+  const name = prompt('Название тура:');
+  if (!name) return;
+  const dates = prompt('Даты (напр. Июль 5–10):');
+  const price = parseInt(prompt('Цена (₸):')) || 100000;
+  const seats = parseInt(prompt('Количество мест:')) || 10;
+  const tours = DB.get('tours') || [];
+  tours.push({ id: Date.now(), name, dates, duration: '', seats, seatsLeft: seats, price, status: 'active' });
+  DB.set('tours', tours);
+  renderAdminTours();
+  showToast('Тур добавлен ✓', 'success');
+}
+
+function toggleTourStatus(id) {
+  const tours = DB.get('tours') || [];
+  const t = tours.find(t => t.id === id);
+  if (t) t.status = t.status === 'active' ? 'inactive' : 'active';
+  DB.set('tours', tours);
+  renderAdminTours();
+}
+
+function renderAdminBookings() {
+  const bookings = DB.get('bookings') || [];
+  const users = getUsers();
+  const body = document.getElementById('bookingsBody');
+  if (!body) return;
+  body.innerHTML = bookings.map(b => {
+    const u = users.find(u => u.id === b.userId);
+    return `<tr>
+      <td>#${b.id}</td>
+      <td>${u ? u.name + ' ' + (u.surname||'') : '—'}</td>
+      <td>${b.tourName}</td>
+      <td>${statusBadge(b.status)}</td>
+      <td>${b.date}</td>
+      <td>${b.paid?'<span class="badge green">Оплачено</span>':'<span class="badge orange">Не оплачено</span>'}</td>
+      <td>
+        <select onchange="changeBookingStatus(${b.id},this.value)" style="padding:4px 6px;font-size:12px;border-radius:6px;border:1px solid #ddd">
+          <option value="confirmed" ${b.status==='confirmed'?'selected':''}>Подтверждён</option>
+          <option value="pending" ${b.status==='pending'?'selected':''}>Ожидает</option>
+          <option value="completed" ${b.status==='completed'?'selected':''}>Завершён</option>
+          <option value="cancelled" ${b.status==='cancelled'?'selected':''}>Отменён</option>
+        </select>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function changeBookingStatus(id, status) {
+  const bookings = DB.get('bookings') || [];
+  const b = bookings.find(b => b.id === id);
+  if (b) {
+    const oldStatus = b.status;
+    b.status = status;
+    DB.set('bookings', bookings);
+    // notify user
+    sendNotification(b.userId, `Статус бронирования #${id} изменён: ${oldStatus} → ${status}`, 'status');
+    const u = getUsers().find(u => u.id === b.userId);
+    if (u) {
+      simulateSendEmail(u.email, `Обновление статуса тура — ${b.tourName}`, `Статус вашего бронирования #${id} изменён на: ${status}`);
+      simulateSendWA(u.phone, `🔄 Статус бронирования #${id} "${b.tourName}" изменён на: ${status}`);
+    }
+    showToast(`Статус #${id} обновлён: ${status}`, 'success');
+  }
+}
+
+function renderAdminPayments() {
+  const payments = DB.get('payments') || [];
+  const users = getUsers();
+  const body = document.getElementById('paymentsBody');
+  if (!body) return;
+  body.innerHTML = payments.map(p => {
+    const u = users.find(u => u.id === p.userId);
+    return `<tr>
+      <td>#${p.id}</td>
+      <td>${u ? u.name : '—'}</td>
+      <td style="font-weight:700;color:var(--accent)">${p.amount.toLocaleString()} ₸</td>
+      <td><span class="badge green">Успешно</span></td>
+      <td>Карта •••• ${p.last4}</td>
+      <td>${p.date}</td>
+      <td><button class="btn ghost sm" onclick="showToast('Чек #${p.id} — демо режим','info')">Чек</button></td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:20px">Платежей нет</td></tr>';
+}
+
+function renderAdminReviews() {
+  const reviews = DB.get('reviews') || [];
+  const el = document.getElementById('adminReviewsList');
+  if (!el) return;
+  el.innerHTML = reviews.map(r => `
+    <div style="background:#fff;padding:14px;border-radius:10px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,0.03)">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;flex-wrap:wrap;gap:8px">
+        <div>
+          <strong>${r.userName}</strong>
+          <span style="margin-left:8px;color:#f59e0b">${'★'.repeat(r.rating)}</span>
+          <span style="margin-left:8px;font-size:12px;color:var(--muted)">${r.date}</span>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center">
+          ${r.status==='pending'?`
+            <button class="btn sm" onclick="moderateReview(${r.id},'approved')">✓ Одобрить</button>
+            <button class="btn danger sm" onclick="moderateReview(${r.id},'rejected')">✕ Отклонить</button>
+          `:`${statusBadge(r.status)}`}
+          <button class="btn danger sm" onclick="deleteReview(${r.id})">🗑 Удалить</button>
+        </div>
+      </div>
+      <p style="margin:0;font-size:13px;color:#444">${r.text}</p>
+    </div>
+  `).join('') || '<p style="color:var(--muted)">Нет отзывов</p>';
+}
+
+function moderateReview(id, status) {
+  const reviews = DB.get('reviews') || [];
+  const r = reviews.find(r => r.id === id);
+  if (r) { r.status = status; DB.set('reviews', reviews); }
+  renderAdminReviews();
+  renderReviewsSection();
+  showToast(`Отзыв ${status === 'approved' ? 'одобрен' : 'отклонён'}`, status==='approved'?'success':'info');
+}
+
+function deleteReview(id) {
+  if (!confirm('Удалить отзыв? Это действие нельзя отменить.')) return;
+  const reviews = (DB.get('reviews') || []).filter(r => r.id !== id);
+  DB.set('reviews', reviews);
+  renderAdminReviews();
+  renderReviewsSection();
+  showToast('Отзыв удалён', 'info');
+}
+
+function renderAdminApplications() {
+  const apps = DB.get('applications') || [];
+  const body = document.getElementById('applicationsBody');
+  if (!body) return;
+  const packs = { '5':'5 дней', '7':'7 дней', '14':'14 дней' };
+  body.innerHTML = apps.map(a => `<tr>
+    <td><strong>${a.name}</strong></td>
+    <td>${a.email}</td>
+    <td>${a.phone||'—'}</td>
+    <td>${packs[a.package]||a.package}</td>
+    <td>${a.status==='new'?'<span class="badge orange">Новая</span>':a.status==='processed'?'<span class="badge green">Обработана</span>':'<span class="badge gray">'+a.status+'</span>'}</td>
+    <td>${a.date}</td>
+    <td>
+      <button class="btn ghost sm" onclick="processApplication(${a.id})">Обработать</button>
+    </td>
+  </tr>`).join('') || '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:20px">Заявок нет</td></tr>';
+}
+
+function processApplication(id) {
+  const apps = DB.get('applications') || [];
+  const a = apps.find(a => a.id === id);
+  if (a) { a.status = 'processed'; DB.set('applications', apps); }
+  renderAdminApplications();
+  showToast('Заявка помечена как обработанная ✓', 'success');
+}
+
+function filterTable(tableId, query) {
+  const table = document.getElementById(tableId);
+  if (!table) return;
+  const q = query.toLowerCase();
+  table.querySelectorAll('tbody tr').forEach(tr => {
+    tr.style.display = tr.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+}
+
+// ============================================================
+// HELPERS
+// ============================================================
+function statusBadge(status) {
+  const map = { confirmed:'<span class="badge green">Подтверждён</span>', pending:'<span class="badge orange">Ожидает</span>', completed:'<span class="badge blue">Завершён</span>', cancelled:'<span class="badge red">Отменён</span>', approved:'<span class="badge green">Одобрен</span>', rejected:'<span class="badge red">Отклонён</span>' };
+  return map[status] || `<span class="badge gray">${status}</span>`;
+}
+
+function showToast(text, type='info') {
+  const container = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  const icons = { success:'✅', info:'ℹ️', warning:'⚠️' };
+  toast.innerHTML = `<span>${icons[type]||'🔔'}</span><span>${text}</span>`;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.style.animation = 'slideOut .3s ease forwards';
+    setTimeout(() => toast.remove(), 300);
+  }, 3500);
+}
+
+// ============================================================
+// FORM SUBMIT
+// ============================================================
+function handleSubmit(e) {
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const agree = document.getElementById('agree').checked;
+  const msg = document.getElementById('msg');
+  if (!name || !email || !agree) {
+    if (msg) { msg.textContent='Пожалуйста, заполните обязательные поля.'; msg.style.color='crimson'; }
+    return false;
+  }
+  // Save as application
+  DB.push('applications', {
+    name, email,
+    phone: document.getElementById('phone').value || '',
+    notes: document.getElementById('notes').value || '',
+    package: document.getElementById('package').value || '7',
+    status: 'new',
+    date: new Date().toISOString().split('T')[0]
+  });
+  if (msg) { msg.textContent='Заявка принята! Мы свяжемся с вами в ближайшее время.'; msg.style.color='var(--accent)'; }
+  showToast('Заявка отправлена! ✓', 'success');
+  setTimeout(() => { const form = document.getElementById('signup'); if(form) form.reset(); if(msg) msg.textContent=''; }, 4500);
+  return false;
+}
+
+// ============================================================
+// INIT ON DOM READY
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  updateHeaderAuth();
+  renderReviewsSection();
+  initStarRating();
+
+  // Counters
+  function animateCounter(id, to, dur) {
+    const el=document.getElementById(id); if(!el) return;
+    let s=0; const step=Math.max(1,Math.floor(to/(dur/30)));
+    const t=setInterval(()=>{ s+=step; if(s>=to){el.textContent=to.toLocaleString();clearInterval(t);}else el.textContent=s.toLocaleString(); },30);
+  }
+  animateCounter('c1',4280,1600);
+  animateCounter('c2',1120,1600);
+  animateCounter('c3',72,1200);
+
+  // Live counter increments (stored in localStorage to persist across reloads)
+  const counters = DB.get('liveCounters') || { c1: 4280, c2: 1120, c3: 72 };
+
+  function updateCounterDisplay() {
+    ['c1','c2','c3'].forEach(id => {
       const el = document.getElementById(id);
-      if (!el) return;
-      let start = 0;
-      const step = Math.max(1, Math.floor(to / (duration / 30)));
-      const timer = setInterval(() => {
-        start += step;
-        if (start >= to) {
-          el.textContent = to.toLocaleString();
-          clearInterval(timer);
-        } else {
-          el.textContent = start.toLocaleString();
-        }
-      }, 30);
-    }
-
-    // --- DOMContentLoaded main init ---
-    document.addEventListener('DOMContentLoaded', () => {
-      // Counters
-      animateCounter('c1', 4280, 1600);
-      animateCounter('c2', 1120, 1600);
-      animateCounter('c3', 72, 1200);
-
-      // Gallery modal interactions (with caption)
-      document.querySelectorAll('.gallery img').forEach(img => {
-        img.addEventListener('click', () => {
-          const modal = document.getElementById('modal');
-          const modalImg = document.getElementById('modalImg');
-          const caption = document.getElementById('modalCaption');
-          modalImg.src = img.dataset.large || img.src;
-          modalImg.alt = img.alt || "";
-          // Use data-caption if provided, otherwise use alt text
-          const detailed = img.dataset.caption || img.alt || "";
-          if (caption) caption.textContent = detailed;
-          modal.classList.remove('hidden');
-          document.body.style.overflow = 'hidden';
-          // scroll caption into view if necessary (small devices)
-          setTimeout(() => {
-            if (caption) caption.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }, 120);
-        });
-      });
-
-      // Gallery modal close handlers
-      const closeModalBtn = document.getElementById('closeModal');
-      if (closeModalBtn) {
-        closeModalBtn.addEventListener('click', () => {
-          const modal = document.getElementById('modal');
-          if (modal) {
-            modal.classList.add('hidden');
-            document.body.style.overflow = '';
-            const caption = document.getElementById('modalCaption');
-            if (caption) caption.textContent = '';
-            const modalImg = document.getElementById('modalImg');
-            if (modalImg) modalImg.src = '';
-          }
-        });
-      }
-      const modalOverlay = document.getElementById('modal');
-      if (modalOverlay) {
-        modalOverlay.addEventListener('click', (e) => {
-          if (e.target && e.target.id === 'modal') {
-            modalOverlay.classList.add('hidden');
-            document.body.style.overflow = '';
-            const caption = document.getElementById('modalCaption');
-            if (caption) caption.textContent = '';
-            const modalImg = document.getElementById('modalImg');
-            if (modalImg) modalImg.src = '';
-          }
-        });
-      }
-
-      // Smooth-scroll from "Смотреть подробнее"
-      const openInfoBtn = document.getElementById('open-info');
-      if (openInfoBtn) {
-        openInfoBtn.addEventListener('click', (e) => {
-          const el = document.getElementById('program');
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        });
-      }
-
-      // Restore simple saved form values (UX convenience for bottom form)
-      try {
-        const saved = JSON.parse(localStorage.getItem('vb_form') || '{}');
-        if (saved && Object.keys(saved).length) {
-          ['name','email','phone','notes','package'].forEach(k => {
-            const el = document.getElementById(k);
-            if (el && saved[k]) el.value = saved[k];
-          });
-        }
-      } catch (e) { /* ignore */ }
+      if (el) el.textContent = counters[id].toLocaleString();
     });
+  }
 
-    // --- Form submit (client-side fake handler) ---
-    function handleSubmit(e) {
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const agree = document.getElementById('agree') ? document.getElementById('agree').checked : true;
-      const msg = document.getElementById('msg');
-      if (!name || !email || !agree) {
-        if (msg) {
-          msg.textContent = 'Пожалуйста, заполните обязательные поля и подтвердите правила.';
-          msg.style.color = 'crimson';
-        } else {
-          alert('Пожалуйста, заполните обязательные поля и подтвердите правила.');
-        }
-        return false;
-      }
-      // Save to localStorage as convenience
-      const payload = {
-        name, email,
-        phone: document.getElementById('phone') ? document.getElementById('phone').value : '',
-        notes: document.getElementById('notes') ? document.getElementById('notes').value : '',
-        package: document.getElementById('package') ? document.getElementById('package').value : ''
-      };
-      try { localStorage.setItem('vb_form', JSON.stringify(payload)); } catch (e) { /* ignore */ }
+  // Деревья: каждые 2.5–5 минут +4 или +5
+  function scheduleTreeIncrement() {
+    const delay = (Math.random() * 2.5 + 2.5) * 60 * 1000; // 2.5–5 минут
+    setTimeout(() => {
+      counters.c1 += Math.random() < 0.5 ? 4 : 5;
+      DB.set('liveCounters', counters);
+      updateCounterDisplay();
+      scheduleTreeIncrement();
+    }, delay);
+  }
 
-      if (msg) {
-        msg.textContent = 'Заявка принята! Мы свяжемся с вами в ближайшее время.';
-        msg.style.color = 'var(--accent)';
-      } else {
-        alert('Заявка принята! Мы свяжемся с вами в ближайшее время.');
-      }
+  // Волонтёры: каждые 2.5–5 минут +1 или +2
+  function scheduleVolunteerIncrement() {
+    const delay = (Math.random() * 2.5 + 2.5) * 60 * 1000;
+    setTimeout(() => {
+      counters.c2 += Math.random() < 0.5 ? 1 : 2;
+      DB.set('liveCounters', counters);
+      updateCounterDisplay();
+      scheduleVolunteerIncrement();
+    }, delay);
+  }
 
-      // Visual confirmation and reset after a while
-      setTimeout(() => {
-        const form = document.getElementById('signup');
-        if (form) form.reset();
-        if (msg) msg.textContent = '';
-      }, 4500);
+  // Акции: каждые 15 минут +1
+  function scheduleActionIncrement() {
+    setTimeout(() => {
+      counters.c3 += 1;
+      DB.set('liveCounters', counters);
+      updateCounterDisplay();
+      scheduleActionIncrement();
+    }, 15 * 60 * 1000);
+  }
 
-      return false;
-    }
+  scheduleTreeIncrement();
+  scheduleVolunteerIncrement();
+  scheduleActionIncrement();
 
-    // --- Accessibility: close gallery/join modal with Esc ---
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        const modal = document.getElementById('modal');
-        if (modal && !modal.classList.contains('hidden')) {
-          modal.classList.add('hidden');
-          document.body.style.overflow = '';
-          const caption = document.getElementById('modalCaption');
-          if (caption) caption.textContent = '';
-          const modalImg = document.getElementById('modalImg');
-          if (modalImg) modalImg.src = '';
-        }
-        // close join modal too if open
-        const jm = document.getElementById('joinModal');
-        if (jm && !jm.classList.contains('hidden')) {
-          jm.classList.add('hidden');
-          document.body.style.overflow = '';
-        }
-      }
+  // Scroll reveal
+  const sections=document.querySelectorAll('section');
+  const obs=new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }); },{threshold:0.12});
+  sections.forEach(s=>obs.observe(s));
+
+  // Gallery modal
+  document.querySelectorAll('.gallery img').forEach(img=>{
+    img.addEventListener('click',()=>{
+      document.getElementById('modalImg').src=img.dataset.large||img.src;
+      document.getElementById('modalCaption').textContent=img.dataset.caption||img.alt;
+      document.getElementById('modal').classList.remove('hidden');
+      document.body.style.overflow='hidden';
     });
+  });
+  document.getElementById('closeModal').addEventListener('click',()=>{ document.getElementById('modal').classList.add('hidden'); document.body.style.overflow=''; });
+  document.getElementById('modal').addEventListener('click',e=>{ if(e.target.id==='modal'){ e.target.classList.add('hidden'); document.body.style.overflow=''; } });
 
-    // --- JOIN MODAL LOGIC (opens only from hero button with .open-hero-join) ---
-    (function(){
-      const openers = document.querySelectorAll('.open-hero-join');
-      const joinModal = document.getElementById('joinModal');
-      const closeJoinModal = document.getElementById('closeJoinModal');
-      const signupForm = document.getElementById('signup');        // основная форма внизу
-      const modalForm = document.getElementById('signupModal');   // форма внутри модалки
+  // Join modal
+  document.querySelectorAll('.open-hero-join').forEach(btn=>{
+    btn.addEventListener('click',e=>{ e.preventDefault(); document.getElementById('joinModal').classList.remove('hidden'); document.body.style.overflow='hidden'; });
+  });
+  document.getElementById('closeJoinModal').addEventListener('click',()=>{ document.getElementById('joinModal').classList.add('hidden'); document.body.style.overflow=''; });
+  document.getElementById('joinModal').addEventListener('click',e=>{ if(e.target.id==='joinModal'){e.target.classList.add('hidden'); document.body.style.overflow=''; } });
 
-      function openJoinModal(e){
-        if (e) e.preventDefault();
-        // sync data from main form -> modal form
-        try {
-          const map = [
-            ['name', 'm_name'],
-            ['email', 'm_email'],
-            ['phone', 'm_phone'],
-            ['package', 'm_package'],
-            ['notes', 'm_notes']
-          ];
-          map.forEach(([mainField, modalField]) => {
-            const mainEl = document.getElementById(mainField);
-            const modalEl = document.getElementById(modalField);
-            if (mainEl && modalEl) modalEl.value = mainEl.value || '';
-          });
-          // checkbox sync
-          const mainAgree = document.getElementById('agree');
-          const modAgree = document.getElementById('m_agree');
-          if (mainAgree && modAgree) modAgree.checked = mainAgree.checked;
-        } catch (err) { /* ignore */ }
+  // Modal form submit
+  const modalForm=document.getElementById('signupModal');
+  if(modalForm) modalForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    ['m_name','m_email','m_phone','m_package','m_notes'].forEach(mid=>{
+      const main=mid.replace('m_',''); const mel=document.getElementById(mid); const el=document.getElementById(main);
+      if(mel&&el) el.value=mel.value;
+    });
+    const ma=document.getElementById('m_agree'); const a=document.getElementById('agree');
+    if(ma&&a) a.checked=ma.checked;
+    document.getElementById('joinModal').classList.add('hidden'); document.body.style.overflow='';
+    const sf=document.getElementById('signup');
+    if(sf) sf.requestSubmit ? sf.requestSubmit() : sf.submit();
+  });
 
-        if (joinModal) {
-          joinModal.classList.remove('hidden');
-          document.body.style.overflow = 'hidden';
-          // focus first input for a11y
-          const first = document.querySelector('#signupModal input, #signupModal textarea, #signupModal select');
-          if (first) first.focus();
-        }
-      }
-
-      // attach openers (only hero buttons)
-      openers.forEach(op => {
-        op.addEventListener('click', openJoinModal);
-      });
-
-      // close via button
-      if (closeJoinModal) {
-        closeJoinModal.addEventListener('click', () => {
-          if (joinModal) {
-            joinModal.classList.add('hidden');
-            document.body.style.overflow = '';
-          }
-        });
-      }
-
-      // close by clicking outside
-      if (joinModal) {
-        joinModal.addEventListener('click', (e) => {
-          if (e.target && e.target.id === 'joinModal') {
-            joinModal.classList.add('hidden');
-            document.body.style.overflow = '';
-          }
-        });
-      }
-
-      // When modal form is submitted: copy values into main form and trigger its submit handler
-      if (modalForm && signupForm) {
-        modalForm.addEventListener('submit', function(e){
-          e.preventDefault();
-          // copy values modal -> main
-          try {
-            const map = [
-              ['m_name', 'name'],
-              ['m_email', 'email'],
-              ['m_phone', 'phone'],
-              ['m_package', 'package'],
-              ['m_notes', 'notes']
-            ];
-            map.forEach(([modalField, mainField]) => {
-              const modalEl = document.getElementById(modalField);
-              const mainEl = document.getElementById(mainField);
-              if (modalEl && mainEl) mainEl.value = modalEl.value;
-            });
-            // checkbox
-            const modAgree = document.getElementById('m_agree');
-            const mainAgree = document.getElementById('agree');
-            if (modAgree && mainAgree) mainAgree.checked = modAgree.checked;
-          } catch (err) { /* ignore */ }
-
-          // close modal visually
-          if (joinModal) {
-            joinModal.classList.add('hidden');
-            document.body.style.overflow = '';
-          }
-
-          // trigger main form submit (this will call handleSubmit via onsubmit attribute)
-          // Use requestSubmit if available to ensure constraint validation happens
-          if (typeof signupForm.requestSubmit === 'function') {
-            signupForm.requestSubmit();
-          } else {
-            // fallback
-            signupForm.submit();
-          }
-        });
-      }
-    })();
-
-// --- Additional safety: avoid JS errors if elements missing elsewhere ---
-    (function(){
-      // wrapper to avoid top-level errors if some optional elements are missing
-    })();
-
-    // --- MOBILE MENU ---
-    (function(){
-      var hamburger = document.getElementById('hamburger');
-      var mobileNav = document.getElementById('mobileNav');
-      var overlay = document.getElementById('mobileNavOverlay');
-      var links = mobileNav ? mobileNav.querySelectorAll('a') : [];
-
-      function openMenu() {
-        hamburger.classList.add('active');
-        mobileNav.classList.add('active');
-        overlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeMenu() {
-        hamburger.classList.remove('active');
-        mobileNav.classList.remove('active');
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-
-      if (hamburger) {
-        hamburger.addEventListener('click', function() {
-          if (mobileNav.classList.contains('active')) {
-            closeMenu();
-          } else {
-            openMenu();
-          }
-        });
-      }
-
-      if (overlay) {
-        overlay.addEventListener('click', closeMenu);
-      }
-
-      for (var i = 0; i < links.length; i++) {
-        links[i].addEventListener('click', closeMenu);
-      }
-
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && mobileNav && mobileNav.classList.contains('active')) {
-          closeMenu();
-        }
-      });
-    })();
-  </script>
+  // Escape key
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') { closeAllOverlays(); document.getElementById('modal')&&document.getElementById('modal').classList.add('hidden'); document.getElementById('joinModal')&&document.getElementById('joinModal').classList.add('hidden'); document.body.style.overflow=''; } });
+});
+</script>
 </body>
 </html>
-
-
